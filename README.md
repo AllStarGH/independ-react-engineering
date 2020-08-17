@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 React_个人独立自主设计之工程
 ======
 
@@ -105,3 +106,7 @@ react-router:实现了路由的核心功能，而react-router-dom依赖react-rou
 	PropTypes 提供一系列验证器，可用于确保组件接收到的数据类型是有效的。例如, 需要使用PropTypes.string, 当传入的 prop 值类型不正确时，JavaScript 控制台将会显示警告。出于性能方面的考虑，propTypes 仅在开发模式下进行检查。
 
 ---------------------
+=======
+# independ-react-engineering
+My independ's Engineering of React
+>>>>>>> 9de66bd331f11461e11415c26c7e7e7ad280e209
