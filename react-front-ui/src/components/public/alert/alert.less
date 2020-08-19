@@ -1,0 +1,60 @@
+@import (reference) "./../../../style/mixin.less";
+
+.alert-contain {
+    .coverScreen(fixed, rgba(0, 0, 0, 0.3));
+    z-index: 11;
+}
+
+.alert-context {
+    .positionCenter;
+    z-index: 12;
+    .wh(160px, 66px);
+    background-color: #fff;
+    border-radius: 4px;
+    .flex(@align-items: stretch);
+    flex-direction: column;
+
+    .alert-content-detail {
+        flex: 5;
+        .flex;
+        .font(40px);
+    }
+
+    .confirm-btn {
+        flex: 2;
+        .flex;
+        .font(40px);
+        border-top: 1PX solid #eee;
+    }
+}
+
+.alert-enter {
+    opacity: 0;
+}
+
+.alert-enter.alert-enter-active {
+    transition: all 300ms;
+    opacity: 1;
+}
+
+.alert-leave {
+    opacity: 1;
+}
+
+.alert-leave.alert-leave-active {
+    transition: all 300ms;
+    opacity: 0;
+}
+
+.close_win {
+    font-weight: bold;
+    margin-top: 8px;
+    background-color: #4cd964;
+    width: 100%;
+    text-align: center;
+    border: 1px;
+    line-height: 18px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    cursor: pointer;
+}

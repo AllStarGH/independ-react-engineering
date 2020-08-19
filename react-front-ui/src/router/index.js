@@ -3,6 +3,7 @@ import { Route, HashRouter, Switch, Redirect } from 'react-router-dom';
 
 /*路由表*/
 const Home = lazy(() => import('@/pages/home/home.jsx')); // 首页
+const Regist = lazy(() => import('@/pages/regist/regist'));
 
 /**
  * This class describes my router.
@@ -37,6 +38,9 @@ export default class MyRouter extends Component {
                 <Suspense fallback={<div>Loading...</div>} maxDuration={1000}>
                     <Switch>
                         <Route exact path="/" component={Home} />
+
+                        <Route exact path="/reg" component={Regist} />
+
                         <Redirect exact from = "/" to = {Home} />
                     </Switch>
                 </Suspense>

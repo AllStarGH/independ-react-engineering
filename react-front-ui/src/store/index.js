@@ -1,7 +1,7 @@
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 
-import userReducer from './reducer';
+import userReducer from './user/reducer';
 
 /*
  *Store 不是类,它只是有几个方法的对象.

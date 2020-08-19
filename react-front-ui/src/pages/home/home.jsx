@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import './home.less';
 
 /**
@@ -42,10 +43,11 @@ class Home extends Component {
                 <div className="a_header_div mine_a_div head_div">
                     <div className="address_div head_div">
                         <div className="target_a_div mine_header_div mine_header_a_div">
-                            <a href={this.state.urls.regURL}>登录</a>
+                            <a href={this.state.urls.loginURL}>登录</a>
                         </div>
                         <div className="target_a_div mine_header_div mine_header_a_div">
-                            <a href={this.state.urls.loginURL}>注册</a>
+                            {/*<a href={this.state.urls.regURL}>注册</a>*/}
+                            <Link className="link_offical" to={this.state.urls.regURL} > 注册 </Link>
                         </div>
                         <div className="target_a_div mine_header_div mine_header_a_div">
                             <a href={this.state.urls.userListURL}>用户列表</a>

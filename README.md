@@ -6,20 +6,21 @@ React_个人独立自主设计之工程
 - 项目快速创建工具: create-react-app(基于webpack)
 
 ```
-
 	用法:
-
 		npx create-react-app 项目名称
 
-
 ```
-
 
 - 项目构建管理工具: webpack
 
 ---------------------
 
-**技术依赖**
+**后端架构**
++ TypeScript
++ nest.js
++ TypeORM
+
+**技术架构[前端]**
 
 + axios
 + react-router-dom
@@ -94,13 +95,13 @@ react-router:实现了路由的核心功能，而react-router-dom依赖react-rou
 ---------------------
 
 
-### fastclick
+#### fastclick
 
 	FastClick 是一个简单易用的库，它消除了移动端浏览器上的物理点击和触发一个 click 事件之间的 300ms 的延迟。目的就是在不干扰你目前的逻辑的同时，让你的应用感觉不到延迟，反应更加灵敏。
 
 ---------------------
 
-### prop-types
+#### prop-types
 
 	PropTypes 提供一系列验证器，可用于确保组件接收到的数据类型是有效的。例如, 需要使用PropTypes.string, 当传入的 prop 值类型不正确时，JavaScript 控制台将会显示警告。出于性能方面的考虑，propTypes 仅在开发模式下进行检查。
 

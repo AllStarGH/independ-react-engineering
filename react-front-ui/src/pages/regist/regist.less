@@ -1,0 +1,102 @@
+.reg_container {
+    font-family: monospace;
+
+    #submit_button_only {
+        background-color: #217ee4;
+    }
+
+    #legend_tip {
+        border-radius: 10px;
+    }
+
+    .btn_part {
+        border-radius: 10px;
+    }
+
+    .btn_container {
+        margin: 10px 0px;
+        text-align: center;
+    }
+
+    .action_btn_ele {
+        width: 70px;
+        display: inline;
+    }
+
+    .mine_form {
+        width: 400px;
+        transform: translate(75%, 60px);
+        font-size: 20px;
+    }
+
+
+
+    fieldset {
+        padding: 18px;
+        background-color: #050c0a;
+        border-radius: 15px;
+    }
+
+    fieldset legend {
+        font-size: larger;
+        border: 1px darkgray solid;
+        padding: 10px;
+        background-color: white;
+    }
+
+    input[type="password"],
+    input[type="text"],
+    input[type="tel"],
+    input[type="email"],
+    textarea {
+        display: block;
+        width: 96%;
+        padding: 2%;
+        margin: 0020px0;
+        border: 1px solid silver;
+        /*为输入控件添加border，使之与label对齐*/
+        border-top: none;
+        font-size: 19px;
+    }
+
+    textarea {
+        resize: none;
+        /*不允许调整textarea的大小，但IE浏览器本身就不支持调整textarea的大小*/
+    }
+
+    label {
+        display: block;
+        width: 98%;
+        padding: 1%;
+        font-size: 15px;
+        background-color: #9c3909;
+        color: aliceblue;
+        border: 1px solid slategray;
+        /*为label元素添加border元素使之与输入控件对齐*/
+    }
+
+    input[type="reset"],
+    input[type="button"] {
+        margin: 10px30px;
+        background-color: darkorange;
+        color: white;
+        padding: 5px;
+        height: 45px;
+        width: 80px;
+        border: 0;
+    }
+
+    input[type="reset"],
+    input[type="submit"]:hover {
+        cursor: pointer;
+        border-color: royalblue;
+    }
+
+    input[type="reset"],
+    input[type="submit"]:active {
+        cursor: pointer;
+        border-color: black;
+        outline-color: cornflowerblue;
+    }
+
+}
