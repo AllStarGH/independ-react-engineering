@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import './home.less';
 
+import LinksList from '@/components/linkslist/linkslist';
+
 /**
  * This class describes a home.
  *
@@ -27,6 +29,13 @@ class Home extends Component {
             videoProcessURL: '/videoProcess',
             userListURL: '/userList',
         },
+        urlWrapper: {
+            storeTraining: {
+                text: 'Store Training',
+                title: "store训练",
+                to: '/store-training'
+            },
+        }
     }
 
     // \\\\\\\\\\\\\\\\\\\\\\\\
@@ -43,20 +52,20 @@ class Home extends Component {
                 <div className="a_header_div mine_a_div head_div">
                     <div className="address_div head_div">
                         <div className="target_a_div mine_header_div mine_header_a_div">
-                            <a href={this.state.urls.loginURL}>登录</a>
+                            <Link to={this.state.urls.loginURL}>登录</Link>
                         </div>
                         <div className="target_a_div mine_header_div mine_header_a_div">
-                            {/*<a href={this.state.urls.regURL}>注册</a>*/}
+                            {/*<Link to={this.state.urls.regURL}>注册</Link>*/}
                             <Link className="link_offical" to={this.state.urls.regURL} > 注册 </Link>
                         </div>
                         <div className="target_a_div mine_header_div mine_header_a_div">
-                            <a href={this.state.urls.userListURL}>用户列表</a>
+                            <Link to={this.state.urls.userListURL}>用户列表</Link>
                         </div>
                         <div className="target_a_div mine_header_div mine_header_a_div" id="special_target_div">
-                            <a href={this.state.urls.videoProcessURL}>改名并迁徙bilibili视频</a>
+                            <Link to={this.state.urls.videoProcessURL}>改名并迁徙bilibili视频</Link>
                         </div>
                         <div className="mine_header_div mine_header_a_div">
-                            <a href={this.state.urls.picturesProcessURL}>图片处理</a>
+                            <Link to={this.state.urls.picturesProcessURL}>图片处理</Link>
                         </div>
                     </div>
                 </div>
@@ -65,8 +74,10 @@ class Home extends Component {
     </header>
     <main id="mine_main">
         <div className="welcome2" id="welcome_2">
-            <h1>Welcome to My React's Engineering</h1>
+            <h1 id="welcome_h_1">Welcome to My React's Engineering</h1>
         </div>
+        {/**/}
+        <LinksList urlWrapper={this.state.urlWrapper}></LinksList>
     </main>
     <footer id="mine_footer">
         <div className="footer_div_01">
