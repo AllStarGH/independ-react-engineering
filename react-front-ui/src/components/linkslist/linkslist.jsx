@@ -47,7 +47,7 @@ export default class LinksList extends Component {
                 <Link className="address_owner" to={this.props.urlWrapper.storeTraining.to} title={this.props.urlWrapper.storeTraining.title}> {this.props.urlWrapper.storeTraining.text} </Link>
             </li>
             <li className="li_owner">
-                <Link className="address_owner" to="##" title="暂未定"> 暂未定 </Link>
+                <Link className="address_owner" to={this.props.urlWrapper.storeTraining2.to} title={this.props.urlWrapper.storeTraining2.title}> {this.props.urlWrapper.storeTraining2.text} </Link>
             </li>
             <li className="li_owner">
                 <Link className="address_owner" to="##" title="暂未定">等待...</Link>

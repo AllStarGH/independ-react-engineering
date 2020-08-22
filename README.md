@@ -30,7 +30,7 @@ React_个人独立自主设计之工程
 + immutable
 + less
 + antd(蚂蚁金服框架)
-+ fastclick
++ fetch
 
 ---------------------
 

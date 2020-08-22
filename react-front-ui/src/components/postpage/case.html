@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title></title>
+</head>
+
+<body>
+    <div class="post_form_container">
+        <div class="form_container">
+            <div class="add_content">
+                <h1>添加内容</h1>
+            </div>
+            <div class="form_div_top">
+                <form class="mine_post_form">
+                    <div class="inp_item_div element_item">
+                        <div>
+                            <label for="title">Title</label>
+                        </div>
+                        <div>
+                            <input type="text" name="title" class="value_local ipt" value="" placeholder="please input the title" />
+                        </div>
+                    </div>
+                    <div class="inp_item_div element_item">
+                        <div>
+                            <label for="body">Body</label>
+                        </div>
+                        <div>
+                            <textarea name="body" class="value_local text_area" value="" placeholder="please input some context"></textarea>
+                        </div>
+                    </div>
+                    <div class="mine_btn_div element_item">
+                        <div id="input_button">
+                            <div class="btn_inp_div">
+                                <input type="reset" class="ipt_btn" value="复位" />
+                            </div>
+                            <div class="btn_inp_div">
+                                <input type="button" class="ipt_btn" value="添加" />
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+<style type="text/css" media="screen">
+.post_form_container {
+    font-family: monospace;
+    position: relative;
+}
+
+h1 {
+    left: 19px;
+    position: relative;
+}
+
+.ipt {
+    height: 22px;
+}
+
+.text_area {
+    height: 130px;
+}
+
+.value_local {
+    width: 197px;
+}
+
+.btn_inp_div {
+    margin: 0 10px;
+}
+
+#input_button {
+    position: relative;
+    left: 25px;
+}
+
+.element_item {
+    margin: 18px 0;
+}
+
+.form_div_top {
+    font-size: 21px;
+}
+
+.btn_inp_div {
+    display: inline;
+}
+
+.form_container {
+	background: #84b2ea;
+    top: 50px;
+    left: 40%;
+    height: 370px;
+    width: 203px;
+    position: relative;
+}
+</style>

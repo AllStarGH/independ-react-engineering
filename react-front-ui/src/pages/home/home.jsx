@@ -31,9 +31,14 @@ class Home extends Component {
         },
         urlWrapper: {
             storeTraining: {
-                text: 'Store Training',
-                title: "store训练",
-                to: '/store-training'
+                text: 'Posts Page',
+                title: "store训练-post_page",
+                to: '/store-training-posts'
+            },
+            storeTraining2: {
+                text: 'PostForm',
+                title: "store训练-PostForm_Page",
+                to: '/store-training-postForm'
             },
         }
     }

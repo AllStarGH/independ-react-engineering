@@ -2,8 +2,11 @@ import React, { lazy, Component, Suspense } from 'react';
 import { Route, HashRouter, Switch, Redirect } from 'react-router-dom';
 
 /*路由表*/
-const Home = lazy(() => import('@/pages/home/home.jsx')); // 首页
+const Home = lazy(() => import('@/pages/home/home')); // 首页
 const Regist = lazy(() => import('@/pages/regist/regist'));
+
+const Posts = lazy(() => import('@/components/postpage/posts'));
+const PostForm = lazy(() => import('@/components/postpage/postForm'));
 
 /**
  * This class describes my router.
@@ -40,6 +43,9 @@ export default class MyRouter extends Component {
                         <Route exact path="/" component={Home} />
 
                         <Route exact path="/reg" component={Regist} />
+
+                        <Route exact path="/store-training-posts" component={Posts} />
+                        <Route exact path="/store-training-postForm" component={PostForm} />
 
                         <Redirect exact from = "/" to = {Home} />
                     </Switch>
