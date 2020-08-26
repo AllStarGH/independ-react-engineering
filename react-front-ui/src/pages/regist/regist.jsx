@@ -96,7 +96,7 @@ export default class Regist extends Component {
     }
 
     /**
-     * { function_description }
+     * { 将表单数据保存至redux，保留状态 }
      *
      * @param      {<type>}  type    The type
      * @param      {<type>}  event   The event

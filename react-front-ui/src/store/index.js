@@ -30,7 +30,7 @@ createStore(reducer, [preloadedState], enhancer):
 
 //redux的combineReducers()可以方便的将redux的reducer拆分为各个小的reducer文件,统一调用各个子reducer,方便统一管理
 let store = createStore(
-    combineReducers({ userReducer, ...postReducer }),
+    combineReducers({ users: userReducer, posts: postReducer }),
     applyMiddleware(thunk)
 );
 

@@ -6,6 +6,7 @@ import { createPost } from '@/store/posts/action';
 // import PropTypes from 'prop-types';
 // 保证数据的不可变
 import { is, fromJS } from 'immutable';
+import MineHeader from '@/components/public/header/header';
 
 import './postForm.less'
 
@@ -15,6 +16,14 @@ import './postForm.less'
  * @class      PostForm (name)
  */
 class PostForm extends Component {
+    constructor() {
+        super();
+        this.state = {
+            titie: "",
+            body: "",
+        }
+    }
+
     componentDidMount() {
         console.log('PostForm component did mount');
         console.dir(this);
@@ -29,13 +38,6 @@ class PostForm extends Component {
 
     // \\\\\\\\\\\\\\\\\\\\\\\\\\
 
-    state = {
-        titie: "",
-        body: "",
-    }
-
-    // \\\\\\\\\\\\\\\\\\\\\\\\\\
-
     onChange = (e) => {
         console.dir(e)
         this.setState({
@@ -45,7 +47,8 @@ class PostForm extends Component {
 
     onSubmit = (e) => {
         console.dir(e)
-        e.preventDefault();
+        // e.preventDefault();
+        e.persist();
 
         const post = {
             titie: this.state.title,
@@ -59,6 +62,7 @@ class PostForm extends Component {
 
     render() {
         const mineDoc = <div className="post_form_container">
+        <MineHeader targetUrl="/" targetUrlName="返回主页" />
         <div className="form_container">
             <div className="add_content">
                 <h1>添加内容</h1>
@@ -70,7 +74,7 @@ class PostForm extends Component {
                             <label htmlFor="title">Title</label>
                         </div>
                         <div>
-                            <input type="text" name="title" className="value_local ipt" placeholder="please input the title" onChange={this.onChange} value={this.state.title} />
+                            <input type="text" name="title" className="value_local ipt" placeholder="please input the title" onChange={this.onChange} value={this.state.title||''} />
                         </div>
                     </div>
                     <div className="inp_item_div element_item">

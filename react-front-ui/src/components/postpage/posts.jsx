@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import { is, fromJS } from 'immutable';
 
 import { fetchPosts } from '@/store/posts/action';
+import MineHeader from '@/components/public/header/header';
 
 class Posts extends Component {
     constructor(props) {
@@ -14,13 +15,22 @@ class Posts extends Component {
     }
 
     componentDidMount() {
+        console.log('component did mount...')
         // 触发action操作actions.js
         this.props.fetchPosts()
     }
 
+    /**
+     * 在组件接收到一个新的 prop更新后时被调用,这个方法在初始化render时不会被调用
+     *
+     * @param      {<type>}  nextProps  The next properties
+     */
     componentWillReceiveProps(nextProps) {
-        if (nextProps.newPosts) {
-            this.props.posts.unshift(nextProps.newPosts);
+        console.log('...Component Will Receive Props...')
+        console.info(nextProps);
+        if (nextProps.newPost) {
+            console.dir(nextProps.newPost)
+            this.props.posts.unshift(nextProps.newPost);
         }
     }
 
@@ -32,6 +42,7 @@ class Posts extends Component {
     }
 
     // \\\\\\\\\\\\\\\\\\\
+
     static propTypes = {
         fetchPosts: PropTypes.func.isRequired,
     }
@@ -41,6 +52,7 @@ class Posts extends Component {
     render() {
         const postItems = this.props.posts.map(post => (
             <div key={post.id}>
+                <span>userId: {post.userId}</span>
         		<h3>{post.title}</h3>
         		<p>{post.body}</p>
     		</div>
@@ -48,7 +60,10 @@ class Posts extends Component {
         /**/
         return (
             <div>
+            <MineHeader targetUrl="/" targetUrlName="返回主页" />
+            {/**/}
         		<h1>Posts</h1>
+                <br/>
         		{postItems}
         	</div>
         )

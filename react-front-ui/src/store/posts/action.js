@@ -4,7 +4,6 @@ import { NEW_POSTS, FETCH_POSTS } from './actionType'
 
 export const fetchPosts = () => dispatch => {
     fetch('http://jsonplaceholder.typicode.com/posts')
-        .then(res => console.dir(res))
         .then(res => res.json())
         .then(posts =>
             // 当操作成功时,通过dispatch将数据提交至store中的reducer
