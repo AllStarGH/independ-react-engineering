@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
-import { is, fromJS } from 'immutable'; // 保证数据的不可变
+// import { is, fromJS } from 'immutable'; // 保证数据的不可变
 
 import './alert.less';
 
@@ -21,21 +21,17 @@ export default class MineAlert extends Component {
         console.log(this);
     }
 
-    componentWillUnmount() {
-        console.log('MineAlert Component WILL UNMOUNT!')
-    }
+    // shouldComponentUpdate(nextProps, nextState) {
+    // console.info(nextProps);
+    // console.info(nextState);
+    // 判断是否要更新render,true=更新;false=不更新
+    // return !is(fromJS(this.props), fromJS(nextProps)) || !is(fromJS(this.state), fromJS(nextState))
+    // }
 
-    shouldComponentUpdate(nextProps, nextState) {
-        console.info(nextProps);
-        console.info(nextState);
-        // 判断是否要更新render,true=更新;false=不更新
-        return !is(fromJS(this.props), fromJS(nextProps)) || !is(fromJS(this.state), fromJS(nextState))
-    }
-
-    componentWillReceiveProps(newProps) {
-        console.log('MineAlert Component WILL RECEIVE PROPS!');
-        console.dir(newProps);
-    }
+    // componentWillReceiveProps(newProps) {
+    // console.log('MineAlert Component WILL RECEIVE PROPS!');
+    // console.dir(newProps);
+    // }
 
     // \\\\\\\\\\\\\\\\\\\\\\\
 
@@ -49,10 +45,11 @@ export default class MineAlert extends Component {
 
     // css动画组件设置为目标组件
     FirstChild = props => {
+        // console.dir(React);
         const childrenArray = React.Children.toArray(props.children);
 
-        console.info(props);
-        console.info(childrenArray);
+        // console.info(props);
+        // console.info(childrenArray);
 
         return childrenArray[0] || null;
     }

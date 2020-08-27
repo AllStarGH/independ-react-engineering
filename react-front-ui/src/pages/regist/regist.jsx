@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { is, fromJS } from 'immutable'; // 保证数据的不可变
+// import { is, fromJS } from 'immutable'; // 保证数据的不可变
 
 import './regist.less';
 
@@ -13,19 +13,23 @@ import MineHeader from '@/components/public/header/header';
  * @class      Regist (name)
  */
 export default class Regist extends Component {
+    constructor(props) {
+        super(props);
+        console.info('Constructor...');
+        console.dir(this);
+    }
+
     componentDidMount() {
         console.info('Regist component did mount...');
     }
 
-    constructor(props) {
-        super(props);
-        console.dir(this);
-    }
-
-    shouldComponentUpdate(nextProps, nextState) {
-        // 判断是否要更新render, return true 更新  return false不更新
-        return !is(fromJS(this.props), fromJS(nextProps)) || !is(fromJS(this.state), fromJS(nextState))
-    }
+    // shouldComponentUpdate(nextProps, nextState) {
+    //     console.info('Should Component Update..');
+    //     console.info(nextProps);
+    //     console.info(nextState);
+    // 判断是否要更新render, return true 更新  return false不更新
+    // return !is1(fromJS(this.props), fromJS(nextProps)) || !is(fromJS(this.state), fromJS(nextState))
+    // }
 
     // \\\\\\\\\\\\\\\\\\\\\\\\\\
 
@@ -34,18 +38,17 @@ export default class Regist extends Component {
     }
 
     state = {
-        userData: {
-            userName: '',
-            userEmail: "",
-            homeAddress: '',
-            phoneNum: "",
-            password: '',
-            repassword: "",
-        },
-        alert: {
-            alertStatus: false,
-            alertTip: "",
-        },
+        userName: '',
+        userEmail: "",
+        homeAddress: '',
+        phoneNum: "",
+        password: '',
+        repassword: "",
+        //
+        alertStatus: false,
+        alertTip: "",
+        //
+        informationTip: '',
     }
 
     // \\\\\\\\\\\\\\\\\\\\\\\\\\
@@ -56,8 +59,9 @@ export default class Regist extends Component {
 
         let isValidate = false;
         let alertTip = '';
+        var userData = {};
 
-        const { userName, userEmail, homeAddress, phoneNum, password, repassword } = this.state.userData;
+        const { userName, userEmail, homeAddress, phoneNum, password, repassword } = this.state;
 
         if (repassword !== password) {
             alertTip = '两次输入的密码不一致';
@@ -77,22 +81,26 @@ export default class Regist extends Component {
         } else if (!password.toString().length) {
             alertTip = '密码禁止为空!';
             isValidate = true;
-        } else if (!this.state.userData.repassword.toString().length) {
+        } else if (!this.state.repassword.toString().length) {
             alertTip = '请再次输入密码!';
             isValidate = true;
         }
 
         if (isValidate) {
             this.setState({
-                alert: {
-                    alertStatus: true,
-                    alertTip: alertTip,
-                }
+                alertStatus: true,
+                alertTip: alertTip,
             })
             return;
         }
 
-        await console.dir(this.state.userData);
+        userData.userName = userName;
+        userData.userEmail = userEmail;
+        userData.homeAddress = homeAddress;
+        userData.phoneNum = phoneNum;
+        userData.password = password;
+
+        await console.dir(userData);
     }
 
     /**
@@ -106,18 +114,105 @@ export default class Regist extends Component {
         console.log(event);
 
         let value = event.target.value;
-        let tempState = {};
-        tempState[type] = value;
-        this.setState(tempState);
+        let newState = {};
+        newState[type] = value;
+        console.log(newState);
+
+        switch (type) {
+            case 'userName':
+                this.verifyUserName(value);
+                break;
+
+            case 'userEmail':
+                this.verifyMailbox(value);
+                break;
+
+            case 'phoneNum':
+                this.verifyPhone(value);
+                break;
+
+            case 'homeAddress':
+                this.verifyHomeAddress(value);
+                break;
+
+            default:
+                break;
+        }
+        this.setState({
+            ...newState
+        })
     }
+
+    // \\\\\\\\\\\\\\\\\\\\\\\\\\
+
+    /* 校验 */
+
+    // 校验手机号码
+    verifyPhone = (value) => {
+        console.log('校验手机号码===' + value)
+        // 中文、英文、数字包括横杠
+        let str = /^(13[0-9]|14[0-9]|15[0-9]|166|17[0-9]|18[0-9]|19[8|9])\d{8}$/;
+        let reg = new RegExp(str);
+        let infoTip = "";
+        if (reg.test(value) === false) {
+            infoTip = '请输入正确格式的手机号码';
+        }
+        this.setState({
+            informationTip: infoTip
+        })
+    }
+
+    // 校验住址
+    verifyHomeAddress = (value) => {
+        console.log('校验住址===' + value)
+        // 中文、英文、数字包括横杠
+        let str = /^[\u4E00-\u9FA5A-Za-z0-9-]+$/;
+        let reg = new RegExp(str);
+        let infoTip = "";
+        if (reg.test(value) === false) {
+            infoTip = '请输入正确格式的住址(中文、英文、数字,及横杠)';
+        }
+        this.setState({
+            informationTip: infoTip
+        })
+    }
+
+    // 校验邮箱
+    verifyMailbox = (value) => {
+        console.log('校验邮箱===' + value);
+        let str = /\w+([-+.']\w+)*@\w+([-.]w+)*\.\w+([-.]\w+)*/;
+        let reg = new RegExp(str);
+        let infoTip = "";
+        if (reg.test(value) === false) {
+            infoTip = '请输入正确格式的邮箱地址';
+        }
+        this.setState({
+            informationTip: infoTip
+        })
+    }
+
+    // 校验用户名
+    verifyUserName = (value) => {
+        console.log('校验用户名===' + value)
+        // 中文、英文、数字但不包括下划线等符号
+        let str = /^[\u4E00-\u9FA5A-Za-z0-9]{2,20}$/;
+        let reg = new RegExp(str);
+        let infoTip = "";
+        if (reg.test(value) === false) {
+            infoTip = '请输入正确格式的用户名(中文、英文、数字)';
+        }
+        this.setState({
+            informationTip: infoTip
+        })
+    }
+
+    // \\\\\\\\\\\\\\\\\\\\\\\\\\
 
     // 关闭弹窗
     closeAlert = () => {
         this.setState({
-            alert: {
-                alertStatus: false,
-                alertTip: ""
-            }
+            alertStatus: false,
+            alertTip: ""
         })
     }
 
@@ -131,37 +226,38 @@ export default class Regist extends Component {
 
             <div className="sub_contain">
             <form className="mine_form">
+            <p ref="information" className="information">{this.state.informationTip}</p>
                 <div>
                     <fieldset>
                         <legend id="legend_tip">填写用户资料</legend>
                         <div>
                             <label htmlFor="userName">Name:</label>
-                            <input maxLength="24" type="text" id="userName" value={this.state.userData.userName} onChange={this.handleInput.bind(this,'userName')} />
+                            <input maxLength="24" type="text" id="userName" value={this.state.userName} onChange={this.handleInput.bind(this,'userName')} />
                             <br />
                         </div>
                         <div>
                             <label htmlFor="userEmail">Email Address:</label>
-                            <input maxLength="52" type="email" id="userEmail" value={this.state.userData.userEmail} onChange={this.handleInput.bind(this,'userEmail')} />
+                            <input maxLength="52" type="email" id="userEmail" value={this.state.userEmail} onChange={this.handleInput.bind(this,'userEmail')} />
                             <br />
                         </div>
                         <div>
                             <label htmlFor="homeAddress">Address:</label>
-                            <input maxLength="56" type="text" id="homeAddress" value={this.state.userData.homeAddress} onChange={this.handleInput.bind(this,'homeAddress')} />
+                            <input maxLength="56" type="text" id="homeAddress" value={this.state.homeAddress} onChange={this.handleInput.bind(this,'homeAddress')} />
                             <br />
                         </div>
                         <div>
                             <label htmlFor="phoneNum">Phone Number:</label>
-                            <input maxLength="16" type="tel" id="phoneNum" value={this.state.userData.phoneNum} onChange={this.handleInput.bind(this,'phoneNum')} />
+                            <input maxLength="16" type="tel" id="phoneNum" value={this.state.phoneNum} onChange={this.handleInput.bind(this,'phoneNum')} />
                             <br />
                         </div>
                         <div>
                             <label htmlFor="password">Password:</label>
-                            <input maxLength="12" type="password" id="password" value={this.state.userData.password} onChange={this.handleInput.bind(this,'password')} />
+                            <input maxLength="16" type="password" id="password" value={this.state.password} onChange={this.handleInput.bind(this,'password')} />
                             <br />
                         </div>
                         <div>
                             <label htmlFor="repassword">Password Again:</label>
-                            <input maxLength="12" type="password" id="repassword" value={this.state.userData.repassword} onChange={this.handleInput.bind(this,'repassword')} />
+                            <input maxLength="16" type="password" id="repassword" value={this.state.repassword} onChange={this.handleInput.bind(this,'repassword')} />
                             <br />
                         </div>
                     </fieldset>
@@ -175,9 +271,9 @@ export default class Regist extends Component {
                     </div>
                 </div>
             </form>
-       	 </div>
+         </div>
 
-		<MineAlert alertStatus = { this.state.alert.alertStatus } alertTip = { this.state.alert.alertTip } closeAlert = { this.closeAlert }
+        <MineAlert alertStatus = { this.state.alertStatus } alertTip = { this.state.alertTip } closeAlert = { this.closeAlert }
             />
 
        </div>

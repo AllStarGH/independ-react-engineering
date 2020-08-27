@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { is, fromJS } from 'immutable'; // 保证数据的不可变
+// import { is, fromJS } from 'immutable'; // 保证数据的不可变
 import './header.less';
 
 /**
@@ -20,10 +20,6 @@ export default class MineHeader extends Component {
         console.log(this);
     }
 
-    componentWillUnmount() {
-        console.log('MineHeader Component WILL UNMOUNT!')
-    }
-
     /**
      * 如果 shouldComponentUpdate 返回 false,则 render() 将不会执行,直到下一次 state 改变.（另外,componentWillUpdate 和 componentDidUpdate 也不会被调用.）
      *
@@ -31,17 +27,17 @@ export default class MineHeader extends Component {
      * @param      {<type>}  nextState  The next state
      * @return     {<type>}  { description_of_the_return_value }
      */
-    shouldComponentUpdate(nextProps, nextState) {
-        console.info(nextProps);
-        console.info(nextState);
-        // 判断是否要更新render,true=更新;false=不更新
-        return !is(fromJS(this.props), fromJS(nextProps)) || !is(fromJS(this.state), fromJS(nextState))
-    }
+    // shouldComponentUpdate(nextProps, nextState) {
+    //     console.info(nextProps);
+    //     console.info(nextState);
+    //     // 判断是否要更新render,true=更新;false=不更新
+    //     return !is(fromJS(this.props), fromJS(nextProps)) || !is(fromJS(this.state), fromJS(nextState))
+    // }
 
-    componentWillReceiveProps(newProps) {
-        console.log('MineHeader Component WILL RECEIVE PROPS!');
-        console.dir(newProps);
-    }
+    // componentWillReceiveProps(newProps) {
+    //     console.log('MineHeader Component WILL RECEIVE PROPS!');
+    //     console.dir(newProps);
+    // }
 
     // \\\\\\\\\\\\\\\\\\\\\\\
 
