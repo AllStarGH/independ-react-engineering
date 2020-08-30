@@ -16,11 +16,12 @@ React_个人独立自主设计之工程
 ---------------------
 
 **后端架构**
+
 + TypeScript
-+ nest.js
++ Nestjs
 + TypeORM
 
-**技术架构[前端]**
+**前端架构**
 
 + axios
 + react-router-dom
