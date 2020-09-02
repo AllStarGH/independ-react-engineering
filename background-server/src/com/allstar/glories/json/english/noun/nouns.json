@@ -1,0 +1,28 @@
+{
+    "comment": "名词分两类,可数(countable)名词,不可数(uncountable)名词",
+    "items":
+    {
+        "countableNoun":
+        {
+            "comment": "可数(countable)名词,能用数目计算的事物和概念的名词",
+            "example":
+            {
+                "0": "desk",
+                "1": "book",
+                "2": "computer",
+                "3": "apple"
+            }
+        },
+        "uncountableNoun":
+        {
+            "comment": "不可数(uncountable)名词,不能用数目计算的事物和概念的名词",
+            "example":
+            {
+                "0": "water",
+                "1": "rain",
+                "2": "sunshine",
+                "3": "coffee"
+            }
+        }
+    }
+}

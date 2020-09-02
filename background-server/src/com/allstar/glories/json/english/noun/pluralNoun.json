@@ -1,0 +1,232 @@
+{
+    "comment": "名词变复数的规则",
+    "items":
+    {
+        "common":
+        {
+            "comment": "一般末尾加上-s",
+            "example":
+            {
+                "0":
+                {
+                    "origin": "girl",
+                    "dest": "girls"
+                },
+                "1":
+                {
+                    "origin": "friend",
+                    "dest": "friends"
+                }
+            }
+        },
+        "suffixS&X&Z&CH&SH":
+        {
+            "comment": "以s或z或x或ch或sh末尾,加上-es",
+            "example":
+            {
+                "0":
+                {
+                    "origin": "bus",
+                    "dest": "buses"
+                },
+                "1":
+                {
+                    "origin": "quiz",
+                    "dest": "quizes(小型考试)"
+                },
+                "2":
+                {
+                    "origin": "fox",
+                    "dest": "foxes"
+                },
+                "3":
+                {
+                    "origin": "match",
+                    "dest": "matches"
+                },
+                "4":
+                {
+                    "origin": "flash",
+                    "dest": "flashes"
+                }
+            }
+
+        },
+        "suffixY":
+        {
+            "comment": "辅音字母+y结尾的话,将y变i,再加上es",
+            "example":
+            {
+                "0":
+                {
+                    "origin": "candy",
+                    "dest": "candies"
+                },
+                "1":
+                {
+                    "origin": "factory",
+                    "dest": "facties"
+                }
+            }
+        },
+        "suffixO":
+        {
+            "comment": "以-o结尾的话,,加上-es",
+            "example":
+            {
+                "0":
+                {
+                    "origin": "tomato",
+                    "dest": "tomatoes"
+                },
+                "1":
+                {
+                    "origin": "hero",
+                    "dest": "heroes"
+                },
+                "2":
+                {
+                    "origin": "potato",
+                    "dest": "potatoes"
+                }
+            },
+            "exceptItem":
+            {
+                "comment": "但以-o结尾的词语是外来(foreign)词的话,直接加上-s",
+                "example":
+                {
+                    "0":
+                    {
+                        "origin": "photo",
+                        "dest": "photos"
+                    },
+                    "1":
+                    {
+                        "origin": "piano",
+                        "dest": "pianos"
+                    },
+                    "2":
+                    {
+                        "origin": "radio",
+                        "dest": "radios"
+                    }
+                }
+            }
+        },
+        "suffixF&Fe":
+        {
+            "comment": "以-f或-fe结尾的话,,先把f或fe变为v,再加上-es",
+            "example":
+            {
+                "0":
+                {
+                    "origin": "life",
+                    "dest": "lives"
+                },
+                "1":
+                {
+                    "origin": "leaf",
+                    "dest": "leaves"
+                },
+                "2":
+                {
+                    "origin": "wife",
+                    "dest": "wives"
+                }
+            }
+        },
+        "minority":
+        {
+            "comment": "minority(少数),少数不规则名詞复数变化形式",
+            "example":
+            {
+                "0":
+                {
+                    "origin": "man",
+                    "dest": "men"
+                },
+                "1":
+                {
+                    "origin": "woman",
+                    "dest": "women"
+                },
+                "2":
+                {
+                    "origin": "foot",
+                    "dest": "feet"
+                },
+                "3":
+                {
+                    "origin": "tooth",
+                    "dest": "teeth"
+                }
+            }
+        },
+        "prefixAn&A":
+        {
+            "comment": "可数名词前可加a或an或量词",
+            "example":
+            {
+                "0":
+                {
+                    "case0":
+                    {
+                        "origin": "apple",
+                        "dest": "an apple"
+                    },
+                    "case1":
+                    {
+                        "origin": "apples",
+                        "dest": "a box of apples"
+                    }
+                },
+                "1":
+                {
+                    "origin": "tomato",
+                    "dest": "a bag of tomatoes"
+                }
+            }
+        },
+        "uncountableNoun":
+        {
+            "comment": "不可数名词前不得加a或an,其没有复数,但前面可以加量词",
+            "example":
+            {
+                "0":
+                {
+                    "origin": "coffee",
+                    "dest": "a cup of coffee"
+                }
+            }
+        },
+        "middleOF":
+        {
+            "comment": "英语中常用'of'词组来表示数量.of前面表示数量的名詞,根据情况用单数或复数.of后面若是不可数名词(uncountable noun),用单数;of后面若是可数名词(countable noun),用复数",
+            "example":
+            {
+                "uncountableNoun":
+                {
+                    "0":
+                    {
+                        "sentence": "a cup of tea"
+                    },
+                    "1":
+                    {
+                        "sentence": "two glasses of milk"
+                    }
+                },
+                "countableNoun":
+                {
+                    "0":
+                    {
+                        "sentence": "three basket of apples"
+                    },
+                    "1":
+                    {
+                        "sentence": "one box of eggs"
+                    }
+                }
+            }
+        }
+    }
+}

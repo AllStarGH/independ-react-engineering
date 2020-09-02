@@ -1,0 +1,220 @@
+{
+    "comment": "冠词分为定冠词(definite article);不定冠词(indefinite article);零冠词(zero article)",
+    "items":
+    {
+        "indefiniteArticle":
+        {
+            "meaning":
+            {
+                "comment": "不定冠词有两种形式:'a'和'an'",
+                "format":
+                {
+                    "0":
+                    {
+                        "comment": "'a'用于辅音(不一定是辅音)开头的名词前",
+                        "example":
+                        {
+                            "0": "a teacher",
+                            "1": "a university",
+                            "2": "a house"
+                        }
+                    },
+                    "1":
+                    {
+                        "comment": "'an'用于元音(不一定是元音)开头的名词前",
+                        "example":
+                        {
+                            "0": "an apple",
+                            "1": "an hour",
+                            "2": "an egg",
+                            "3": "an orange"
+                        }
+                    }
+                }
+            },
+            "usage":
+            {
+                "0":
+                {
+                    "comment": "表示某类人或事物当中的1个",
+                    "example": "Her brother is a college student."
+                },
+                "1":
+                {
+                    "comment": "表示'1',即数量 一 ",
+                    "example": "A year divied into twelve months."
+                },
+                "2":
+                {
+                    "comment": "表示同一性,说明事物的同一特征或大小或程度或性质",
+                    "example": "This hat and that one are of a shape."
+                },
+                "3":
+                {
+                    "comment": "指事物的单位,相当于every或any",
+                    "example": "She kept on writing to parents once a month."
+                }
+            },
+            "collocation":
+            {
+                "comment": "常见词组搭配",
+                "example":
+                {
+                    "0": "a lot of",
+                    "1": "a good many",
+                    "2": "as a result",
+                    "3":
+                    {
+                        "sentence": "as a matter of fact",
+                        "translate": "实际上"
+                    }
+                }
+            }
+        },
+        "definiteArticle":
+        {
+            "usage":
+            {
+                "comment": "定冠词the的常见用法",
+                "example":
+                {
+                    "0":
+                    {
+                        "comment": "特指某人或者某物时",
+                        "example":
+                        {
+                            "0":
+                            {
+                                "comment": "特指上文已提过的人或者物",
+                                "case":
+                                {
+                                    "sentence": "He came across an old friend in a shop.The friend was now a general manager",
+                                    "translate": "他在一家商店里遇到一位老朋友.这位朋友现在是总经理."
+                                }
+                            },
+                            "1":
+                            {
+                                "comment": "特指双方都知道的人或者物",
+                                "case":
+                                {
+                                    "sentence": "Did you park the car at the corner?",
+                                    "translate": "你把车停在拐角处了吗?"
+                                }
+                            },
+                            "2":
+                            {
+                                "comment": "特指形容词最高或比较级所修饰的某个确定的人或者物",
+                                "case":
+                                {
+                                    "sentence": "He chose the bigger orange, but she chose the smallest one.",
+                                    "translate": "他选了一个较大的橙子,而她选了最小的一个橙子"
+                                }
+                            }
+                        }
+                    },
+                    "1":
+                    {
+                        "comment": "世界上独一无二的名词或者乐器名词前",
+                        "example":
+                        {
+                            "0":
+                            {
+                                "sentence": "The earth is bigger than the moon,but smaller than the sun",
+                                "translate": "地球大于月球但小于太阳"
+                            },
+                            "1":
+                            {
+                                "sentence": "Do you like to play the piano or the violin",
+                                "translate": "你喜欢弹钢琴还是拉小提琴"
+                            }
+                        }
+                    },
+                    "2":
+                    {
+                        "comment": "the + 形容词,表示一类人或者物",
+                        "example":
+                        {
+                            "0":
+                            {
+                                "sentence": "the old,the young,the rich,the poor,the sick",
+                                "translate": "老人,年轻人,富人,穷人,病人"
+                            },
+                            "1":
+                            {
+                                "sentence": "He stole from the rich to give the poor",
+                                "translate": "他窃富济贫"
+                            }
+                        }
+                    },
+                    "3":
+                    {
+                        "comment": "the+姓氏+s,表示一家人或一对夫妇",
+                        "example":
+                        {
+                            "0": "the Greens",
+                            "1": "the Smiths",
+                            "2": "the Zhangs",
+                            "3": "the Curies(居里夫妇)"
+                        }
+                    }
+                }
+            }
+        },
+        "zeroArticle":
+        {
+            "usage":
+            {
+                "0":
+                {
+                    "comment": "(零冠词)用在学科或球类运动或游戏名称前",
+                    "example":
+                    {
+                        "0":
+                        {
+                            "sentence": "English is learned in most high school",
+                            "translate": "大多数高中都学英语"
+                        },
+                        "1":
+                        {
+                            "sentence": "They enjoy playing basketball in the afternoon",
+                            "translate": "下午,他们正在痛快地打着篮球"
+                        },
+                        "2":
+                        {
+                            "sentence": "The old are playing chess under the tree",
+                            "translate": "树下,老人们正在下棋"
+                        }
+                    }
+                },
+                "1":
+                {
+                    "comment": "(零冠词)用在一日三餐前,但若其前后有形容词或从句或短语修饰时,应加冠词",
+                    "example":
+                    {
+                        "usual":
+                        {
+                            "comment": "不加冠词时",
+                            "sentence": "We usually go to school after breakfast at seven",
+                            "translate": "我们通常在七点吃完早餐后前往学校"
+                        },
+                        "unusual":
+                        {
+                            "comment": "加冠词时",
+                            "sentence": "How do you like the dinner Mr.Jack prepared?",
+                            "translate": "你喜欢跟杰克先生一块儿准备午餐吗?"
+                        }
+                    }
+                },
+                "2":
+                {
+                    "comment": "星期,月份,季节,节日等名词前(但月份,季节等詞前后如有限制性定语修饰表示特定时间时,其前面需加the)",
+                    "example":
+                    {
+                        "0": "Today is Wedesday",
+                        "1": "October 1 is National Day"
+                    }
+                }
+            }
+        }
+    }
+}
