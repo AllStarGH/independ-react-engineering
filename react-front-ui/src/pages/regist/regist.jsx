@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-// import { is, fromJS } from 'immutable'; // 保证数据的不可变
+import axios from 'axios';
 
 import './regist.less';
 
@@ -47,7 +47,8 @@ export default class Regist extends Component {
 
     // 提交注册用户数据
     registHandler = async () => {
-        console.log('提交注册用户数据.');
+        let url = 'http://localhost:1440/user/signUp';
+        console.log('提交用户注册数据');
 
         let isValidate = false;
         let alertTip = '';
@@ -93,6 +94,14 @@ export default class Regist extends Component {
         userData.password = password;
 
         await console.dir(userData);
+
+        axios.post(url, userData)
+             .then(response => {
+                 console.dir(response)
+             })
+             .catch(err => {
+                 console.error(err);
+             })
     }
 
     /**
