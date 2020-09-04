@@ -21,18 +21,6 @@ export default class MineAlert extends Component {
         console.log(this);
     }
 
-    // shouldComponentUpdate(nextProps, nextState) {
-    // console.info(nextProps);
-    // console.info(nextState);
-    // 判断是否要更新render,true=更新;false=不更新
-    // return !is(fromJS(this.props), fromJS(nextProps)) || !is(fromJS(this.state), fromJS(nextState))
-    // }
-
-    // componentWillReceiveProps(newProps) {
-    // console.log('MineAlert Component WILL RECEIVE PROPS!');
-    // console.dir(newProps);
-    // }
-
     // \\\\\\\\\\\\\\\\\\\\\\\
 
     static propTypes = {

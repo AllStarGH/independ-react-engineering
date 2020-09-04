@@ -23,14 +23,6 @@ export default class Regist extends Component {
         console.info('Regist component did mount...');
     }
 
-    // shouldComponentUpdate(nextProps, nextState) {
-    //     console.info('Should Component Update..');
-    //     console.info(nextProps);
-    //     console.info(nextState);
-    // 判断是否要更新render, return true 更新  return false不更新
-    // return !is1(fromJS(this.props), fromJS(nextProps)) || !is(fromJS(this.state), fromJS(nextState))
-    // }
-
     // \\\\\\\\\\\\\\\\\\\\\\\\\\
 
     static propType = {

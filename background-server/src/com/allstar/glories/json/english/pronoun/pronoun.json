@@ -1,0 +1,59 @@
+{
+    "name": "代词(pronoun)",
+    "meaning": "代替人或事物的名词",
+    "personal_pronoun":
+    {
+        "nominative_pronoun":
+        {
+            "name": "主格代词",
+            "item": "I,he,she,it,you,we,they",
+            "example": ["I am a teacher", "He is a teacher", "You are a teacher"]
+        },
+        "accusative_pronoun":
+        {
+            "name": "宾格代词",
+            "item": "me,him,her,it,you,us,them(放在动词后面作宾语)",
+            "example": ["He likes me", "We likes her", "I likes them"]
+        }
+    },
+    "reflexive_pronoun":
+    {
+        "name": "反身代词",
+        "formats": [
+        {
+            "singular": "单数",
+            "items": ["myself", "youself", "herself", "himself", "itself"]
+        },
+        {
+            "complex": "复数",
+            "items": ["myselves", "ourselves", "themselves"]
+        }],
+        "usage": ["please help yourself to some fish.(宾语)",
+            "we enjoyed ourselves last night.(宾语)",
+            "the thing itself is not important.(同位语)"
+        ]
+    },
+    "demonstrative_pronoun":
+    {
+        "name": "指示代词",
+        "meaning": "表示人或事物的代词,用来代替前面已经被提到过的名词",
+        "items": [
+            "this(these)",
+            "that"
+        ],
+        "example": [
+            "this is my book",
+            "those books were his"
+        ],
+        "commonly_used":
+        {
+            "name": "常用用法",
+            "items": ["one", "the other", "some", "any", "something", "nothing"],
+            "example": [
+                "no oneknows where he is",
+                "some of the boys want to go Shaghai,but the others want to go XiAn",
+                "each of the students has got a book"
+            ]
+        }
+    }
+}

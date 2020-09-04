@@ -1,7 +1,7 @@
 import * as path from 'path';
 import { getJsonContext } from "./getJsonContext";
 
-// var fileUrl = './../../json/english/article/article.json';
+// var fileUrl = './../../json/english/pronoun/pronoun.json';
 // const jsonFileUrl = path.resolve(`${__dirname}`, fileUrl);
 // console.info('jsonFileUrl=== ' + jsonFileUrl);
 

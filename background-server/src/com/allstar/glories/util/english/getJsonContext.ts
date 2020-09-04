@@ -8,6 +8,5 @@ import * as path from 'path';
  */
 export const getJsonContext = (filePath: string) => {
 	var content = fs.readFileSync(filePath, 'utf8')
-	console.info(content);
 	return content;
 }

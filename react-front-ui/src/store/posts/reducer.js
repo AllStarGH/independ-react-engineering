@@ -10,7 +10,7 @@ const initialState = {
 // store会拿之前的状态和action交给reducer,reducer会进行判断,看执行的是哪个action-type,然后返回相应数据
 // 然后进入reducer内
 export default function(state = initialState, action) {
-    console.info('there are posts.reducer.')
+    console.info('there are posts.reducer')
     console.log(action)
     console.dir(state);
 

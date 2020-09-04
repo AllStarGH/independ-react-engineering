@@ -21,12 +21,12 @@ export class EnglishController {
 	private json_dir_path: string = './../../json/english/';
 
 	/**
-	 * http://localhost:1440/english/findJson?filePath=noun/nouns.json
+	 * http://localhost:1440/english/getEnglishNote?filePath=noun/nouns.json
 	 *
 	 * @class      Get (name)
 	 */
-	@Get('findJson')
-	findJson(@Query('filePath') filePath): string {
+	@Get('getEnglishNote')
+	getEnglishNote(@Query('filePath') filePath): string {
 		console.log('file path == ' + filePath);
 
 		var englishController = new EnglishController();
