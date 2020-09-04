@@ -3,22 +3,25 @@ React_个人独立自主设计之工程
 
 ---------------------
 
-- 项目快速创建工具: create-react-app(基于webpack)
+主要以react+react-redux, 联合nest.js+typescript的前后端分离开发之项目.
+
+---------------------
+
+<i>创建前台工程</i>:
 
 ```
-	用法:
-		npx create-react-app 项目名称
+
+	npx create-react-app PROJECT-NAME
 
 ```
 
-- 项目构建管理工具: webpack
 
 ---------------------
 
 **后端架构**
 
 + TypeScript
-+ Nestjs
++ Nest.js
 + TypeORM
 
 **前端架构**
@@ -37,8 +40,9 @@ React_个人独立自主设计之工程
 
 #### Redux
 
-	Redux是一个流行的JavaScript框架，为应用程序提供一个可预测的状态容器。Redux基于简化版本的Flux框架，Flux是Facebook开发的一个框架。在标准的MVC框架中，数据可以在UI组件和存储之间双向流动，而Redux严格限制了数据只能在一个方向上流动。 
-	
+	Redux是一个流行的JavaScript框架，为应用程序提供一个可预测的状态容器。Redux基于简化版本的Flux框架，Flux是Facebook开发的一个框架。在标准的MVC框架中，数据可以在UI组件和存储之间双向流动，而Redux严格限制了数据只能在一个方向上流动。
+
+
 	在Redux中，所有的数据（比如state）被保存在一个被称为store的容器中 → 在一个应用程序中只能有一个。store本质上是一个状态树，保存了所有对象的状态。任何UI组件都可以直接从store访问特定对象的状态。要通过本地或远程组件更改状态，需要分发一个action。分发在这里意味着将可执行信息发送到store。当一个store接收到一个action，它将把这个action代理给相关的reducer。reducer是一个纯函数，它可以查看之前的状态，执行一个action并且返回一个新的状态
 
 ---------------------
