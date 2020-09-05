@@ -47,7 +47,7 @@ export default class Regist extends Component {
 
     // 提交注册用户数据
     registHandler = async () => {
-        let url = 'http://localhost:1440/user/signUp';
+        let url = '/api/user/signUp';
         console.log('提交用户注册数据');
 
         let isValidate = false;
