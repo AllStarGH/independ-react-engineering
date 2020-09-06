@@ -1,7 +1,11 @@
 import { Controller, Get, Post, Body } from '@nestjs/common';
+import { UserService } from './../../service/user/user.service';
+
 
 @Controller('user')
 export class UserController {
+	constructor(private readonly userService:UserService){}
+
 	@Get()
 	index(): string {
 		let html = '<div style="text-align:center;padding:1em 0 0 0;">';

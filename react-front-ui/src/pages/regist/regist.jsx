@@ -45,14 +45,13 @@ export default class Regist extends Component {
 
     // \\\\\\\\\\\\\\\\\\\\\\\\\\
 
-    // 提交注册用户数据
-    registHandler = async () => {
-        let url = '/api/user/signUp';
-        console.log('提交用户注册数据');
-
+    /**
+     * 校验非空
+     *
+     * @return     {(boolean|string)}  { description_of_the_return_value }
+     */
+    verifyNotNull = () => {
         let isValidate = false;
-        let alertTip = '';
-        var userData = {};
 
         const { userName, userEmail, homeAddress, phoneNum, password, repassword } = this.state;
 
@@ -74,11 +73,26 @@ export default class Regist extends Component {
         } else if (!password.toString().length) {
             alertTip = '密码禁止为空!';
             isValidate = true;
-        } else if (!this.state.repassword.toString().length) {
+        } else if (!repassword.toString().length) {
             alertTip = '请再次输入密码!';
             isValidate = true;
         }
 
+        console.log('isValidate === ' + isValidate);
+        return isValidate;
+    }
+
+    /**
+     * 提交注册用户数据
+     */
+    registHandler = async () => {
+        let url = '/api/user/signUp';
+        console.log('提交用户注册数据');
+
+        let alertTip = '';
+        var userData = {};
+
+        let isValidate = this.verifyNotNull();
         if (isValidate) {
             this.setState({
                 alertStatus: true,
@@ -92,16 +106,15 @@ export default class Regist extends Component {
         userData.homeAddress = homeAddress;
         userData.phoneNum = phoneNum;
         userData.password = password;
-
         await console.dir(userData);
 
         axios.post(url, userData)
-             .then(response => {
-                 console.dir(response)
-             })
-             .catch(err => {
-                 console.error(err);
-             })
+            .then(response => {
+                console.dir(response)
+            })
+            .catch(err => {
+                console.error(err);
+            })
     }
 
     /**
@@ -146,7 +159,7 @@ export default class Regist extends Component {
 
     // \\\\\\\\\\\\\\\\\\\\\\\\\\
 
-    /* 校验 */
+    /* 校验正则 */
 
     // 校验手机号码
     verifyPhone = (value) => {
