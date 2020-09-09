@@ -36,7 +36,7 @@ export const checksDB=dbUrl=>{
  */
 function connectResp(code=500,msg='no response by db connects'){
 	this.code = code;
-	this.msg = msg || 'NULL.';
+	this.msg = msg || 'NULL';
 }
 
 // module.exports = checksDB;
