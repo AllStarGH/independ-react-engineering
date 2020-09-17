@@ -1,0 +1,9 @@
+{
+    "type": "sqlite",
+    "database": "./src/com/allstar/gits/resource/database/DB.sql",
+    "entities": [
+        "dist/**/**.entity{.ts,.js}"
+    ],
+    "synchronize": true,
+    "logging": true
+}
