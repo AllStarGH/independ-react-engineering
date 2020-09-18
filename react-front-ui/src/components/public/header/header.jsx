@@ -49,7 +49,7 @@ export default class MineHeader extends Component {
     // \\\\\\\\\\\\\\\\\\\\\\\
     render() {
         return (
-            <header className="public_header" ref="own_header">
+            <header className="public_header">
         <div className="line_div_super name_div">
             <em className="developer_name"> AllStarGH </em>
         </div>

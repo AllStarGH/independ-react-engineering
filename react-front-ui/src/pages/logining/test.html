@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>用户登录</title>
+    <link rel="stylesheet" href="">
+</head>
+
+<body>
+    <div class="loginin_container">
+        <div class="loginin_form_div">
+            <form class="loginin_form">
+                <div class="title_form">
+                    <legend id="legend_title">用户登录界面</legend>
+                </div>
+                <div class="inputs_container">
+                    <div class="item_inputs">
+                        <input type="text" placeholder="请输入电话或邮箱" maxlength="46" class="inp_tag" />
+                    </div>
+                    <div class="item_inputs">
+                        <input type="password" placeholder="请输入密码" maxlength="18" class="inp_tag" />
+                    </div>
+                </div>
+                <div class="btns_container">
+                    <div class="item_button">
+                        <input type="button" value="登录" class="inp_btn" id="submits_enter" />
+                    </div>
+                    <div class="item_button">
+                        <input type="reset" value="重置" class="inp_btn" id="reset_btn" />
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>
+<style type="text/css" media="screen">
+#reset_btn {
+    color: white;
+    background: #cdc40d;
+    font-size: 20px;
+    border: 1px;
+}
+
+#submits_enter {
+    color: white;
+    background: #0b7754;
+    font-size: 20px;
+    border: 1px;
+}
+
+.inp_btn {
+    height: 40px;
+    width: 60px;
+    margin: 16px;
+    border-radius: 5px;
+}
+
+.inp_tag {
+    width: 96%;
+    height: 29px;
+    font-size: medium;
+    border-radius: 5px;
+}
+
+.item_inputs {
+    margin: 15px 0;
+}
+
+.item_button {
+    display: inline;
+}
+
+.loginin_form {
+    padding: 12px;
+}
+
+.loginin_form_div {
+    width: 420px;
+    text-align: center;
+    position: fixed;
+    top: 23%;
+    left: 34%;
+    background: #4a4af3;
+    color: white;
+    border-radius: 5px;
+}
+</style>

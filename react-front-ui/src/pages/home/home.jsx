@@ -51,7 +51,7 @@ class Home extends Component {
      */
     opens = () => {
         EjectWindow.opened({
-            alertTip: 'this is a alert window of test',
+            alertTip: 'That"s so good.',
             closedAlert: () => {
                 console.log('弹窗要关闭了')
             }

@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 
-import './regist.less';
-
 import MineAlert from '@/components/public/alert/alert';
 import MineHeader from '@/components/public/header/header';
+
+import './regist.less';
 
 /**
  * This class describes a regist.
@@ -25,10 +25,6 @@ export default class Regist extends Component {
 
     // \\\\\\\\\\\\\\\\\\\\\\\\\\
 
-    static propType = {
-        userInfo: PropTypes.object.isRequired,
-    }
-
     state = {
         userName: '',
         userEmail: "",
@@ -36,10 +32,10 @@ export default class Regist extends Component {
         phoneNum: "",
         password: '',
         repassword: "",
-        //
+        /**/
         alertStatus: false,
         alertTip: "",
-        //
+        /**/
         informationTip: '',
     }
 
@@ -52,31 +48,37 @@ export default class Regist extends Component {
      */
     verifyNotNull = () => {
         let isValidate = false;
+        let alertInfo = "";
 
         const { userName, userEmail, homeAddress, phoneNum, password, repassword } = this.state;
 
         if (repassword !== password) {
-            alertTip = '两次输入的密码不一致';
+            alertInfo = '两次输入的密码不一致';
             isValidate = true;
         } else if (!userName.toString().length) {
-            alertTip = '用户名称禁止为空!';
+            alertInfo = '用户名称禁止为空!';
             isValidate = true;
         } else if (!userEmail.toString().length) {
-            alertTip = '邮箱地址禁止为空!';
+            alertInfo = '邮箱地址禁止为空!';
             isValidate = true;
         } else if (!homeAddress.toString().length) {
-            alertTip = '住址禁止为空!';
+            alertInfo = '住址禁止为空!';
             isValidate = true;
         } else if (!phoneNum.toString().length) {
-            alertTip = '电话号码禁止为空!';
+            alertInfo = '电话号码禁止为空!';
             isValidate = true;
         } else if (!password.toString().length) {
-            alertTip = '密码禁止为空!';
+            alertInfo = '密码禁止为空!';
             isValidate = true;
         } else if (!repassword.toString().length) {
-            alertTip = '请再次输入密码!';
+            alertInfo = '请再次输入密码!';
             isValidate = true;
         }
+
+        this.setState({
+            alertStatus: isValidate,
+            alertTip: alertInfo,
+        });
 
         console.log('isValidate === ' + isValidate);
         return isValidate;
@@ -87,30 +89,41 @@ export default class Regist extends Component {
      */
     registHandler = async () => {
         let url = '/api/userContro/register';
-        console.log('提交用户注册数据');
-
-        let alertTip = '';
+        let alertInfo = '';
         var userData = {};
 
         let isValidate = this.verifyNotNull();
         if (isValidate) {
-            this.setState({
-                alertStatus: true,
-                alertTip: alertTip,
-            })
             return;
         }
 
-        userData.userName = userName;
-        userData.userEmail = userEmail;
-        userData.homeAddress = homeAddress;
-        userData.phoneNum = phoneNum;
-        userData.password = password;
-        await console.dir(userData);
+        userData.userName = this.state.userName;
+        userData.userEmail = this.state.userEmail;
+        userData.homeAddress = this.state.homeAddress;
+        userData.phoneNum = this.state.phoneNum;
+        userData.password = this.state.password;
+        console.dir(userData);
 
-        axios.post(url, userData)
+        await axios.post(url, userData)
             .then(response => {
                 console.dir(response);
+                if (response.data.code === 200) {
+                    console.dir(response.data);
+                    alertInfo = "新用户注册成功,即将跳转至首页...";
+                    this.setState({
+                        alertStatus: true,
+                        alertTip: alertInfo,
+                    });
+                    setTimeout(() => {
+                        this.props.history.push('/');
+                    }, 15 * 1000);
+                } else {
+                    console.dir(response.data.message);
+                    this.setState({
+                        alertStatus: true,
+                        alertTip: response.data.message,
+                    });
+                }
             })
             .catch(err => {
                 console.error(err);
@@ -235,9 +248,8 @@ export default class Regist extends Component {
     render() {
         return (
             <div className="reg_container" ref = "own_reg_html" >
-
             <MineHeader targetUrl="/login" targetUrlName="已有账户,前往登录" />
-
+            {/**/}
             <div className="sub_contain">
             <form className="mine_form">
             <p ref="information" className="information">{this.state.informationTip}</p>
@@ -286,10 +298,9 @@ export default class Regist extends Component {
                 </div>
             </form>
          </div>
-
+         {/**/}
         <MineAlert alertStatus = { this.state.alertStatus } alertTip = { this.state.alertTip } closeAlert = { this.closeAlert }
             />
-
        </div>
         );
     }

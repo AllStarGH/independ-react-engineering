@@ -7,6 +7,8 @@ const Regist = lazy(() => import('@/pages/regist/regist'));
 
 const Posts = lazy(() => import('@/components/postpage/posts'));
 const PostForm = lazy(() => import('@/components/postpage/postForm'));
+// 登录页面
+const Logining = lazy(() => import('@/pages/logining/logining'));
 
 /**
  * This class describes my router.
@@ -41,6 +43,8 @@ export default class MyRouter extends Component {
                 <Suspense fallback={<div>Loading...</div>} maxDuration={1000}>
                     <Switch>
                         <Route exact path="/" component={Home} />
+
+                        <Route exact path="/login" component={Logining} />
 
                         <Route exact path="/reg" component={Regist} />
 
