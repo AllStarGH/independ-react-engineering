@@ -86,7 +86,7 @@ export default class Regist extends Component {
      * 提交注册用户数据
      */
     registHandler = async () => {
-        let url = '/api/user/signUp';
+        let url = '/api/userContro/register';
         console.log('提交用户注册数据');
 
         let alertTip = '';
@@ -110,7 +110,7 @@ export default class Regist extends Component {
 
         axios.post(url, userData)
             .then(response => {
-                console.dir(response)
+                console.dir(response);
             })
             .catch(err => {
                 console.error(err);
