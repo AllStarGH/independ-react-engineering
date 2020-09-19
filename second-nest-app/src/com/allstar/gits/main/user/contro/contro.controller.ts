@@ -16,46 +16,66 @@ export class ControController {
 		private readonly userServ1: Serv1Service
 		) { }
 
+	/**
+	 * 获取全体用户列表
+	 * http://localhost:1100/userContro/getUserList
+	 *
+	 * @class      Get (name)
+	 */
+	@Get('getUserList')
+	async getUserList(): Promise<Result>{
+		var list = await this.userServ1.getUserList();
+		console.dir(list);
+
+		list.forEach((val:User,i:number)=>{
+			console.log(i, val);
+			val.password = '';
+			val.salt = '';
+		})
+
+		let res: Result = ({ code: 200, message: '', data: list });
+		return res;
+	}
+
+	/*
+	 * 账号登录测试
+	 http://localhost:1100/userContro/loginingTest?account=2120442004844@qq.com&password=1234567
+	 */
+	@Get('loginingTest')
+	async loginingTest(@Query() query): Promise<Result> {
+		let res = this.userServ1.loginingServ(query);
+		console.dir(res);
+		return res;
+	}
+
+	/**
+	 * { 登录 }
+	 *
+	 * @class      Post (name)
+	 */
+	@Post('logining')
+	async logining(@Body() query): Promise<Result> {
+		let res = this.userServ1.loginingServ(query);
+		console.dir(res);
+		return res;
+	}
+
 	/*
 	 http://localhost:1100/userContro/regActTest?userName=信克勤&userEmail=1204404844@qq.com&phoneNum=13640219871&homeAddress=长城6700&password=123456
 	 */
 	@Get('regActTest')
 	async regActTest(@Query() query): Promise<Result> {
 		console.dir(query);
-
-		let user1 = new User();
-
-		user1.userName = query.userName;
-		user1.userEmail = query.userEmail;
-		user1.phoneNum = query.phoneNum;
-		user1.homeAddress = query.homeAddress;
-
-		user1.salt = getUUID.getUUID();
-		user1.password = getScrectText.getScrectText(query.password, user1.salt);
-		console.dir(user1);
-
-		await this.userServ1.saveOneUser(user1);
-		return ({ code: 200, message: '注册成功', data: '1' });
+		let res = await this.userServ1.registerService(query);
+		return res;
 	}
 
 	// 正式注册
 	@Post('register')
 	async register(@Body() userData: User): Promise<Result> {
 		console.dir(userData);
-
-		let user1 = new User();
-
-		user1.userName = userData.userName;
-		user1.userEmail = userData.userEmail;
-		user1.phoneNum = userData.phoneNum;
-		user1.homeAddress = userData.homeAddress;
-
-		user1.salt = getUUID.getUUID();
-		user1.password = getScrectText.getScrectText(userData.password, user1.salt);
-		console.dir(user1);
-
-		await this.userServ1.saveOneUser(user1);
- 		return ({ code: 200, message: '注册成功', data: '1' });
+		let res = await this.userServ1.registerService(userData);
+		return res;
 	}
 
 }
