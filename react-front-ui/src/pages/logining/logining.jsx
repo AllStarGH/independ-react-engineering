@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import axios from 'axios';
-
-import { saveUserInfo } from '@/store/user/action';
 
 import MineAlert from '@/components/public/alert/alert';
 import MineHeader from '@/components/public/header/header';
@@ -34,10 +31,6 @@ export default class Logining extends Component {
     }
 
     // \\\\\\\\\\\\\\\\\\\\\\\\
-
-    static propTypes = {
-        // saveUserInfo: PropTypes.func.isRequired,
-    }
 
     state = {
         account: "",
@@ -74,7 +67,7 @@ export default class Logining extends Component {
 
     // 提交,登录
     loginEnter = async () => {
-        let url = '/api/userContro/xxx';
+        let url = '/api/userContro/logining';
 
         // 校验非空
         let isValidate = this.verifyNotNull();
@@ -85,6 +78,39 @@ export default class Logining extends Component {
         console.log(this.state.account + ' , ' + this.state.password);
 
         // 登录成功后,需把用户数据保存至session中
+        axios.post(url, { account: this.state.account , password: this.state.password })
+        .then(res=>{
+            console.dir(res);
+            if (res.data.code===200) {
+                let u = res.data.data;
+                console.info('用户登录成功,即将跳转至首页');
+                /**/
+                this.setState({
+                    alertStatus: true,
+                    alertTip: '用户登录成功,即将跳转至首页',
+                });
+                /**/
+                localStorage.setItem('id',u.id);
+                localStorage.setItem('userName',u.userName);
+                localStorage.setItem('userEmail',u.userEmail);
+                localStorage.setItem('phoneNum',u.phoneNum);
+                localStorage.setItem('homeAddress',u.homeAddress);
+                /**/
+                setTimeout(() => {
+                    this.props.history.push('/');
+                }, 15 * 1000);
+            } else {
+                console.log(res.data.message);
+                /**/
+                this.setState({
+                    alertStatus: true,
+                    alertTip: res.data.message,
+                });
+            }
+        })
+        .catch(err=>{
+            console.error(err);
+        })
     }
 
     // \\\\\\\\\\\\\\\\\\\\\\\\

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import axios from 'axios';
 
 import MineAlert from '@/components/public/alert/alert';
@@ -87,7 +86,7 @@ export default class Regist extends Component {
     /**
      * 提交注册用户数据
      */
-    registHandler = async () => {
+    registHandler = () => {
         let url = '/api/userContro/register';
         let alertInfo = '';
         var userData = {};
@@ -104,18 +103,20 @@ export default class Regist extends Component {
         userData.password = this.state.password;
         console.dir(userData);
 
-        await axios.post(url, userData)
+        axios.post(url, userData)
             .then(response => {
                 console.dir(response);
                 if (response.data.code === 200) {
                     console.dir(response.data);
-                    alertInfo = "新用户注册成功,即将跳转至首页...";
+                    alertInfo = "新用户注册成功,即将跳转至登录界面.";
+                    /**/
                     this.setState({
                         alertStatus: true,
                         alertTip: alertInfo,
                     });
+                    /**/
                     setTimeout(() => {
-                        this.props.history.push('/');
+                        this.props.history.push('/login');
                     }, 15 * 1000);
                 } else {
                     console.dir(response.data.message);

@@ -74,8 +74,7 @@ class Home extends Component {
                                     <Link to={this.state.urls.loginURL}>登录</Link>
                                 </div>
                                 <div className="target_a_div mine_header_div mine_header_a_div">
-                                    {/*
-                                <Link to={this.state.urls.regURL}>注册</Link>*/}
+                                    {/* */}
                                     <Link className="link_offical" to={this.state.urls.regURL}> 注册 </Link>
                                 </div>
                                 <div className="target_a_div mine_header_div mine_header_a_div">
