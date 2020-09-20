@@ -41,7 +41,8 @@ class Home extends Component {
                 title: "store训练-PostForm_Page",
                 to: '/store-training-postForm'
             },
-        }
+        },
+        alertTip: "That's so good.",
     }
 
     // \\\\\\\\\\\\\\\\\\\\\\\\
@@ -51,11 +52,11 @@ class Home extends Component {
      */
     opens = () => {
         EjectWindow.opened({
-            alertTip: 'That"s so good.',
+            alertTip: this.state.alertTip,
             closedAlert: () => {
                 console.log('弹窗要关闭了')
             }
-        })
+        });
     }
 
     // \\\\\\\\\\\\\\\\\\\\\\\\

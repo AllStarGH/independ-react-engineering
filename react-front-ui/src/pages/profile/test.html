@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>我的个人资料</title>
+</head>
+
+<body>
+    <div class="mine_profile_container">
+        <div class="profile_container">
+            <form class="mine_form">
+                <div class="title_div">
+                    <legend class="title_word">我的个人资料</legend>
+                </div>
+                <div class="profile_items_content">
+                    <div class="profile_item">
+                        <input type="text" value="username" class="inp_user" maxlength="52" disabled="disabled" />
+                    </div>
+                    <div class="profile_item">
+                        <input type="text" value="useremail" class="inp_user" maxlength="72" disabled="disabled" />
+                    </div>
+                    <div class="profile_item">
+                        <input type="text" value="phonenum" class="inp_user" maxlength="48" disabled="disabled" />
+                    </div>
+                    <div class="profile_item">
+                        <input type="text" value="homeaddress" class="inp_user" maxlength="80" disabled="disabled" />
+                    </div>
+                </div>
+                <div class="btns">
+                    <div class="btn_item">
+                        <input type="button" value="修改资料" id="alter_profile" class="alter_btn" onclick="clickedAlterData()" />
+                    </div>
+                    <div class="btn_item">
+                        <input type="button" value="取消修改" id="cancel_alter" class="alter_btn" />
+                    </div>
+                    <div class="btn_item">
+                        <input type="button" value="提交修改" id="submit_alter" class="alter_btn" />
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>
+<script type="text/javascript">
+function clickedAlterData() {
+    var inputObj = document.getElementsByClassName('inp_user');
+    console.log(inputObj);
+
+    for (var i = inputObj.length - 1; i >= 0; i--) {
+        inputObj[i].disabled = false;
+    }
+}
+</script>
+<style type="text/css" media="screen">
+#cancel_alter,
+#submit_alter {
+    display: none;
+}
+
+#alter_profile,
+#cancel_alter,
+#submit_alter {
+    color: white;
+    border-width: 0;
+    cursor: pointer;
+}
+
+#cancel_alter {
+    background: #508cd8;
+}
+
+#submit_alter {
+    background: #15c710;
+}
+
+#alter_profile {
+    background: #37c998;
+}
+
+.title_div {
+    color: white;
+    margin: 20px 0 0 0;
+}
+
+.alter_btn {
+    height: 44px;
+}
+
+.mine_form,
+.inp_user,
+.alter_btn {
+    border-radius: 5px;
+}
+
+.profile_item {
+    margin: 14px 0;
+}
+
+.inp_user {
+    width: 95%;
+    height: 33px;
+    border-width: 0px;
+}
+
+.profile_items_content {
+    margin: 24px 0 5px 0;
+}
+
+.btns {
+    margin: 23px 0;
+}
+
+.mine_form {
+    font-size: 23px;
+    position: fixed;
+    left: 34%;
+    top: 16%;
+    background: #88cadc;
+    width: 420px;
+}
+
+.profile_container {
+    text-align: center;
+}
+
+.btn_item {
+    display: inline;
+}
+</style>

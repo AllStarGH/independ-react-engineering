@@ -66,7 +66,7 @@ export default class Logining extends Component {
     // \\\\\\\\\\\\\\\\\\\\\\\\
 
     // 提交,登录
-    loginEnter = async () => {
+    loginEnter = () => {
         let url = '/api/userContro/logining';
 
         // 校验非空

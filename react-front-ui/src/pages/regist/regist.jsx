@@ -257,32 +257,32 @@ export default class Regist extends Component {
                 <div>
                     <fieldset>
                         <legend id="legend_tip">填写用户资料</legend>
-                        <div>
+                                <div className="item_inp_div">
                             <label htmlFor="userName">Name:</label>
                             <input maxLength="24" type="text" id="userName" value={this.state.userName} onChange={this.handleInput.bind(this,'userName')} />
                             <br />
                         </div>
-                        <div>
+                                <div className="item_inp_div">
                             <label htmlFor="userEmail">Email Address:</label>
                             <input maxLength="52" type="email" id="userEmail" value={this.state.userEmail} onChange={this.handleInput.bind(this,'userEmail')} />
                             <br />
                         </div>
-                        <div>
+                                <div className="item_inp_div">
                             <label htmlFor="homeAddress">Address:</label>
                             <input maxLength="56" type="text" id="homeAddress" value={this.state.homeAddress} onChange={this.handleInput.bind(this,'homeAddress')} />
                             <br />
                         </div>
-                        <div>
+                                <div className="item_inp_div">
                             <label htmlFor="phoneNum">Phone Number:</label>
                             <input maxLength="16" type="tel" id="phoneNum" value={this.state.phoneNum} onChange={this.handleInput.bind(this,'phoneNum')} />
                             <br />
                         </div>
-                        <div>
+                                <div className="item_inp_div">
                             <label htmlFor="password">Password:</label>
                             <input maxLength="16" type="password" id="password" value={this.state.password} onChange={this.handleInput.bind(this,'password')} />
                             <br />
                         </div>
-                        <div>
+                                <div className="item_inp_div">
                             <label htmlFor="repassword">Password Again:</label>
                             <input maxLength="16" type="password" id="repassword" value={this.state.repassword} onChange={this.handleInput.bind(this,'repassword')} />
                             <br />

@@ -1,6 +1,8 @@
 .reg_container {
     font-family: monospace;
     padding: 0 0 126px 0;
+    width: 100%;
+    position: relative;
 
     .information {
         color: #ec566f;
@@ -12,6 +14,8 @@
 
     #legend_tip {
         border-radius: 10px;
+        left: 26%;
+        position: relative;
     }
 
     .btn_part {
@@ -35,10 +39,16 @@
         font-size: 20px;
     }
 
+    .item_inp_div>label,
+    .item_inp_div>input {
+        border-width: 0px;
+    }
+
     fieldset {
         padding: 18px;
-        background-color: #050c0a;
-        border-radius: 15px;
+        background-color: #3359e4;
+        border-radius: 6px;
+        border-width: 0px;
     }
 
     fieldset legend {
@@ -61,6 +71,7 @@
         /*为输入控件添加border，使之与label对齐*/
         border-top: none;
         font-size: 19px;
+        border-radius: 5px;
     }
 
     textarea {
@@ -73,7 +84,7 @@
         width: 98%;
         padding: 1%;
         font-size: 15px;
-        background-color: #9c3909;
+        background-color: #3359e4;
         color: aliceblue;
         border: 1px solid slategray;
         /*为label元素添加border元素使之与输入控件对齐*/
