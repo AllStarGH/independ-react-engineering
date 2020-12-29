@@ -4,13 +4,15 @@
   "private": true,
   "dependencies": {
     "@babel/core": "7.9.0",
+    "@material-ui/core": "^4.11.2",
+    "@material-ui/data-grid": "^4.0.0-alpha.13",
+    "@material-ui/icons": "^4.11.2",
     "@svgr/webpack": "4.3.3",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "@typescript-eslint/eslint-plugin": "^2.10.0",
     "@typescript-eslint/parser": "^2.10.0",
-    "antd": "^4.5.4",
     "axios": "^0.19.2",
     "babel-eslint": "10.1.0",
     "babel-jest": "^24.9.0",
@@ -122,9 +124,9 @@
       "^.+\\.module\\.(css|sass|scss)$"
     ],
     "modulePaths": [
-      "/home/user/001/softwares/node-v14.4.0-linux-x64/lib/node_modules",
-      "/home/user/001/softwares/node-v14.4.0-linux-x64/bin",
-      "/home/user/001/softwares/apache-maven-3.6.2/bin",
+      "/home/user/admin/softwares/node-v14.4.0-linux-x64/lib/node_modules",
+      "/home/user/admin/softwares/node-v14.4.0-linux-x64/bin",
+      "/home/user/admin/softwares/apache-maven-3.6.2/bin",
       "/usr/local/sbin",
       "/usr/local/bin",
       "/usr/sbin",
@@ -133,8 +135,8 @@
       "/bin",
       "/usr/games",
       "/usr/local/games",
-      "/home/user/001/softwares/jdk8/jdk1.8.0_161/bin",
-      "/home/user/001/softwares/jdk8/jdk1.8.0_161/jre/bin"
+      "/home/user/admin/softwares/jdks/jdk1.8.0-161/bin",
+      "/home/user/admin/softwares/jdks/jdk1.8.0-161/jre/bin"
     ],
     "moduleNameMapper": {
       "^react-native$": "react-native-web",

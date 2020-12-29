@@ -57,12 +57,10 @@ export default class MineHeader extends Component {
             <div className="side_link line_div">
 
                 <Link to={this.props.targetUrl} className='address_jump'> {this.props.targetUrlName} </Link>
-
             </div>
             <div className="side_link line_div">
 
                 <Link to="/" className='address_jump'> 返回首页 </Link>
-
             </div>
             <div className="side_link line_div">
 

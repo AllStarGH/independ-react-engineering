@@ -66,7 +66,7 @@ export default class Logining extends Component {
     // \\\\\\\\\\\\\\\\\\\\\\\\
 
     // 提交,登录
-    loginEnter = async () => {
+    loginEnter = () => {
         let url = '/api/userContro/logining';
 
         // 校验非空
@@ -157,7 +157,7 @@ export default class Logining extends Component {
 
     render() {
         var pageContent = <div className="loginin_container">
-			<MineHeader targetUrl="/reg" targetUrlName="还没有账户,前往注册" />
+			<MineHeader targetUrl="/reg" targetUrlName="没有账户?前往注册" />
 			{/**/}
 			<div className="loginin_form_div">
 				<form className="loginin_form">

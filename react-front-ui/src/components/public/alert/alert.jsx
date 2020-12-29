@@ -17,7 +17,7 @@ export default class MineAlert extends Component {
     }
 
     componentDidMount() {
-        console.log('MineAlert Component DID MOUNT!')
+        console.log('MineAlert Component DID MOUNT!');
         console.log(this);
     }
 

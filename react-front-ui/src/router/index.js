@@ -10,6 +10,8 @@ const PostForm = lazy(() => import('@/components/postpage/postForm'));
 // 登录页面
 const Logining = lazy(() => import('@/pages/logining/logining'));
 
+const UsersList = lazy(() => import('@/pages/userslist/usersList'));
+
 /**
  * This class describes my router.
  *
@@ -48,8 +50,11 @@ export default class MyRouter extends Component {
 
                         <Route exact path="/reg" component={Regist} />
 
-                        <Route exact path="/store-training-posts" component={Posts} />
-                        <Route exact path="/store-training-postForm" component={PostForm} />
+                        <Route exact path="/posts" component={Posts} />
+
+                        <Route exact path="/postForm" component={PostForm} />
+
+                        <Route exact path="/usersList" component={UsersList} />
 
                         <Redirect exact from = "/" to = {Home} />
                     </Switch>

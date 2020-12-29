@@ -28,20 +28,21 @@ class Home extends Component {
             loginURL: '/login',
             picturesProcessURL: '/picturesProcess',
             videoProcessURL: '/videoProcess',
-            userListURL: '/userList',
+            usersListURL: '/usersList',
         },
         urlWrapper: {
             storeTraining: {
                 text: 'Posts Page',
-                title: "store训练-post_page",
-                to: '/store-training-posts'
+                title: "post_page",
+                to: '/posts'
             },
             storeTraining2: {
                 text: 'Post Form',
-                title: "store训练-PostForm_Page",
-                to: '/store-training-postForm'
+                title: "PostForm_Page",
+                to: '/postForm'
             },
-        }
+        },
+        alertTip: "That's so good.",
     }
 
     // \\\\\\\\\\\\\\\\\\\\\\\\
@@ -51,11 +52,11 @@ class Home extends Component {
      */
     opens = () => {
         EjectWindow.opened({
-            alertTip: 'That"s so good.',
+            alertTip: this.state.alertTip,
             closedAlert: () => {
                 console.log('弹窗要关闭了')
             }
-        })
+        });
     }
 
     // \\\\\\\\\\\\\\\\\\\\\\\\
@@ -78,10 +79,10 @@ class Home extends Component {
                                     <Link className="link_offical" to={this.state.urls.regURL}> 注册 </Link>
                                 </div>
                                 <div className="target_a_div mine_header_div mine_header_a_div">
-                                    <Link to={this.state.urls.userListURL}>用户列表</Link>
+                                    <Link to={this.state.urls.usersListURL}>用户列表</Link>
                                 </div>
                                 <div className="target_a_div mine_header_div mine_header_a_div" id="special_target_div">
-                                    <Link to={this.state.urls.videoProcessURL}>改名并迁徙bilibili视频</Link>
+                                    <Link to={this.state.urls.videoProcessURL}>视频处理</Link>
                                 </div>
                                 <div className="mine_header_div mine_header_a_div">
                                     <Link to={this.state.urls.picturesProcessURL}>图片处理</Link>
