@@ -203,6 +203,7 @@ export default class Profile extends Component {
 
     // 提交修改后的资料
     submitData = () => {
+        var nowTime = new Date().getTime();
         let url = '';
         let userParam = {};
 
@@ -231,12 +232,12 @@ export default class Profile extends Component {
                     homeAddress: data.homeAddress,
                     userEmail: data.userEmail,
                 });
-                /**/
-                localStorage.setItem('id', data.id);
-                localStorage.setItem('userName', data.userName);
-                localStorage.setItem('userEmail', data.userEmail);
-                localStorage.setItem('phoneNum', data.phoneNum);
-                localStorage.setItem('homeAddress', data.homeAddress);
+                /* keep it for an hour */
+                localStorage.setItem('userid', data.id, nowTime + 1000 * 10 * 360);
+                // localStorage.setItem('userName', data.userName);
+                // localStorage.setItem('userEmail', data.userEmail);
+                // localStorage.setItem('phoneNum', data.phoneNum);
+                // localStorage.setItem('homeAddress', data.homeAddress);
                 this.opens();
             } else {
                 console.info('未知错误...');

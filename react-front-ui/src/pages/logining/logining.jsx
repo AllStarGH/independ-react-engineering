@@ -69,7 +69,7 @@ export default class Logining extends Component {
     loginEnter = () => {
         let url = '/api/userContro/logining';
 
-        var date = new Date().getDate();
+        var date = new Date().getTime();
         console.log('date === ' + date);
 
         // 校验非空
