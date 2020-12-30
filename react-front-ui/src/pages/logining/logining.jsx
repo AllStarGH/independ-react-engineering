@@ -69,6 +69,9 @@ export default class Logining extends Component {
     loginEnter = () => {
         let url = '/api/userContro/logining';
 
+        var date = new Date().getDate();
+        console.log('date === ' + date);
+
         // 校验非空
         let isValidate = this.verifyNotNull();
         if (isValidate) {
@@ -78,39 +81,39 @@ export default class Logining extends Component {
         console.log(this.state.account + ' , ' + this.state.password);
 
         // 登录成功后,需把用户数据保存至session中
-        axios.post(url, { account: this.state.account , password: this.state.password })
-        .then(res=>{
-            console.dir(res);
-            if (res.data.code===200) {
-                let u = res.data.data;
-                console.info('用户登录成功,即将跳转至首页');
-                /**/
-                this.setState({
-                    alertStatus: true,
-                    alertTip: '用户登录成功,即将跳转至首页',
-                });
-                /**/
-                localStorage.setItem('id',u.id);
-                localStorage.setItem('userName',u.userName);
-                localStorage.setItem('userEmail',u.userEmail);
-                localStorage.setItem('phoneNum',u.phoneNum);
-                localStorage.setItem('homeAddress',u.homeAddress);
-                /**/
-                setTimeout(() => {
-                    this.props.history.push('/');
-                }, 15 * 1000);
-            } else {
-                console.log(res.data.message);
-                /**/
-                this.setState({
-                    alertStatus: true,
-                    alertTip: res.data.message,
-                });
-            }
-        })
-        .catch(err=>{
-            console.error(err);
-        })
+        axios.post(url, { account: this.state.account, password: this.state.password })
+            .then(res => {
+                console.dir(res);
+                if (res.data.code === 200) {
+                    let u = res.data.data;
+                    console.info('用户登录成功,即将跳转至首页');
+                    /**/
+                    this.setState({
+                        alertStatus: true,
+                        alertTip: '用户登录成功,即将跳转至首页',
+                    });
+                    /*保存一小时*/
+                    localStorage.setItem('userid', u.id, date + 100 * 100 * 360);
+                    // localStorage.setItem('userName',u.userName);
+                    // localStorage.setItem('userEmail',u.userEmail);
+                    // localStorage.setItem('phoneNum',u.phoneNum);
+                    // localStorage.setItem('homeAddress',u.homeAddress);
+                    /**/
+                    setTimeout(() => {
+                        this.props.history.push('/');
+                    }, 15 * 1000);
+                } else {
+                    console.log(res.data.message);
+                    /**/
+                    this.setState({
+                        alertStatus: true,
+                        alertTip: res.data.message,
+                    });
+                }
+            })
+            .catch(err => {
+                console.error(err);
+            })
     }
 
     // \\\\\\\\\\\\\\\\\\\\\\\\
@@ -157,35 +160,35 @@ export default class Logining extends Component {
 
     render() {
         var pageContent = <div className="loginin_container">
-			<MineHeader targetUrl="/reg" targetUrlName="没有账户?前往注册" />
-			{/**/}
-			<div className="loginin_form_div">
-				<form className="loginin_form">
-					<div className="title_form">
-						<legend id="legend_title">用户登录界面</legend>
-					</div>
-					<div className="inputs_container">
-						<div className="item_inputs">
-							<input type="text" placeholder="请输入电话或邮箱" maxLength="46" className="inp_tag" value={this.state.account} onChange={this.handleInput.bind(this, 'account')} />
-						</div>
-						<div className="item_inputs">
-							<input type="password" placeholder="请输入密码" maxLength="18" className="inp_tag" value={this.state.password} onChange={this.handleInput.bind(this, 'password')} />
-						</div>
-					</div>
-					<div className="btns_container">
-						<div className="item_button">
-							<input type="button" value="登录" className="inp_btn" id="submits_enter" onClick={this.loginEnter} />
-						</div>
-						<div className="item_button">
-							<input type="reset" value="重置" className="inp_btn" id="reset_btn" />
-						</div>
-					</div>
-				</form>
-			</div>
-			{/**/}
-			<MineAlert alertStatus={this.state.alertStatus} alertTip={this.state.alertTip} closeAlert={this.shutDownAlert}
-			/>
-		</div>;
+            <MineHeader targetUrl="/reg" targetUrlName="没有账户?前往注册" />
+            {/**/}
+            <div className="loginin_form_div">
+                <form className="loginin_form">
+                    <div className="title_form">
+                        <legend id="legend_title">用户登录界面</legend>
+                    </div>
+                    <div className="inputs_container">
+                        <div className="item_inputs">
+                            <input type="text" placeholder="请输入电话或邮箱" maxLength="46" className="inp_tag" value={this.state.account} onChange={this.handleInput.bind(this, 'account')} />
+                        </div>
+                        <div className="item_inputs">
+                            <input type="password" placeholder="请输入密码" maxLength="18" className="inp_tag" value={this.state.password} onChange={this.handleInput.bind(this, 'password')} />
+                        </div>
+                    </div>
+                    <div className="btns_container">
+                        <div className="item_button">
+                            <input type="button" value="登录" className="inp_btn" id="submits_enter" onClick={this.loginEnter} />
+                        </div>
+                        <div className="item_button">
+                            <input type="reset" value="重置" className="inp_btn" id="reset_btn" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+            {/**/}
+            <MineAlert alertStatus={this.state.alertStatus} alertTip={this.state.alertTip} closeAlert={this.shutDownAlert}
+            />
+        </div>;
         /**/
         return (pageContent);
     }

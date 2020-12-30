@@ -11,6 +11,7 @@ const PostForm = lazy(() => import('@/components/postpage/postForm'));
 const Logining = lazy(() => import('@/pages/logining/logining'));
 
 const UsersList = lazy(() => import('@/pages/userslist/usersList'));
+const Profile = lazy(() => import('@/pages/profile/profile'));
 
 /**
  * This class describes my router.
@@ -28,7 +29,6 @@ export default class MyRouter extends Component {
     }
 
     // \\\\\\\\\\\\\\\\\\
-
     /**
      * 这里用 redirect 进行首页自动跳转到 /home 路由下,
      * exact 意味着精确匹配,
@@ -55,6 +55,8 @@ export default class MyRouter extends Component {
                         <Route exact path="/postForm" component={PostForm} />
 
                         <Route exact path="/usersList" component={UsersList} />
+
+                        <Route exact path="/profile" component={Profile} />
 
                         <Redirect exact from = "/" to = {Home} />
                     </Switch>

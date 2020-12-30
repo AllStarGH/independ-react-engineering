@@ -26,20 +26,25 @@ class Home extends Component {
         urls: {
             regURL: '/reg',
             loginURL: '/login',
-            picturesProcessURL: '/picturesProcess',
-            videoProcessURL: '/videoProcess',
+            picturesProcessURL: '/#',
+            videoProcessURL: '/#',
             usersListURL: '/usersList',
         },
         urlWrapper: {
             storeTraining: {
                 text: 'Posts Page',
-                title: "post_page",
+                title: "Post page",
                 to: '/posts'
             },
             storeTraining2: {
                 text: 'Post Form',
-                title: "PostForm_Page",
+                title: "PostForm page",
                 to: '/postForm'
+            },
+            site3: {
+                text: 'Profile',
+                title: "Personal profile",
+                to: '/profile'
             },
         },
         alertTip: "That's so good.",

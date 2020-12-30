@@ -15,12 +15,15 @@ export default class Profile extends Component {
     }
 
     componentDidMount() {
+        let userid = localStorage.getItem('userid');
+
         console.log('Profile Component DID MOUNT!!!');
         console.log(this.props);
-        let userid = localStorage.getItem('id');
-        console.log('userid=== ' + userid);
+        console.log('userid === ' + userid);
+
         if (userid != null) {
-            console.info('已登录.');
+            console.info('Already logged in');
+            // 获取用户资料
         } else {
             this.setState({
                 alertStatus: true,
@@ -33,9 +36,9 @@ export default class Profile extends Component {
 
     state = {
         id: null,
-        userName: null,
-        phoneNum: null,
-        homeAddress: null,
+        userName: '',
+        phoneNum: '',
+        homeAddress: '',
         userEmail: '',
         /**/
         alertStatus: false,
@@ -66,7 +69,6 @@ export default class Profile extends Component {
     }
 
     // \\\\\\\\\\\\\\\\\\
-
     /**
      * 检验非空
      *
@@ -100,7 +102,6 @@ export default class Profile extends Component {
     }
 
     // \\\\\\\\\\\\\\\\\\
-
     // 获取用户的资料据地址参数ID
     getUserProfile = (uid) => {
         let uri = '';
@@ -126,7 +127,6 @@ export default class Profile extends Component {
     }
 
     // \\\\\\\\\\\\\\\\\\
-
     handleInput = (type, event) => {
         console.log('type');
         console.log(type);
@@ -142,24 +142,64 @@ export default class Profile extends Component {
     }
 
     // \\\\\\\\\\\\\\\\\\
-
-    // 点击修改资料
+    /**
+     * 点击修改资料
+     * @return {[type]} [description]
+     */
     clickedAlterData = () => {
+        let f = this.refs.mineForm;
+
         // 移除input标签disabled属性
+        let inpUser = f.getElementsByClassName('inp_user');
+        console.log(inpUser);
+        for (var i = inpUser.length - 1; i >= 0; i--) {
+            inpUser[i].disabled = false;
+        }
 
-        // 使取消和提交按钮显示出来
+        // 显示 提交修改+取消修改 按钮
+        var altering = f.getElementsByClassName('altering');
+        console.log(altering);
+        for (var n = altering.length - 1; n >= 0; n--) {
+            altering[n].style.display = 'block';
+        }
 
-        // 隐藏修改按钮
+        // 隐藏 修改资料 按钮
+        var alterProfile = f.getElementsByClassName('div_alter_pro');
+        console.dir(alterProfile);
+        alterProfile[0].style.display = 'none';
+
     }
 
-	// 取消修改操作
-	clickedAlterData = () => {
-		// 给input标签增加disabled="disabled"属性(setAttribute)
+    /**
+     * 取消修改操作
+     * 点击取消修改,恢复原状(隐藏取消+提交按钮,显示修改按钮,输入框变为不可输入)
+     * @return {[type]} [description]
+     */
+    cancelAlterFun = () => {
+        let f = this.refs.mineForm;
 
-		// 使取消和提交按钮隐藏
+        // 给input标签增加disabled="disabled"属性(setAttribute)
+        var inputObj = f.getElementsByClassName('inp_user');
+        console.log(inputObj);
+        for (var i = inputObj.length - 1; i >= 0; i--) {
+            inputObj[i].disabled = true;
+        }
 
-		// 显示修改按钮
-	}
+        // 隐藏 提交修改+取消修改 按钮
+        var altering = f.getElementsByClassName('altering');
+        console.log(altering);
+        for (var n = altering.length - 1; n >= 0; n--) {
+            altering[n].style.display = 'none';
+        }
+
+        // 显示 修改资料 按钮
+        var alterProfile = f.getElementsByClassName('div_alter_pro');
+        console.dir(alterProfile);
+        alterProfile[0].style.display = 'block';
+        alterProfile[0].style.left = '42%';
+        alterProfile[0].style.position = 'relative';
+
+    }
 
     // 提交修改后的资料
     submitData = () => {
@@ -210,45 +250,47 @@ export default class Profile extends Component {
 
     render() {
         var content = <div className="mine_profile_container">
-        	{/**/}
-			<MineHeader targetUrl="/alterPassword" targetUrlName="修改登录密码" />
-			{/**/}
-			<div className="profile_container">
-				<form className="mine_form" ref="mineForm">
-					<div className="title_div">
-						<legend className="title_word">我的个人资料</legend>
-					</div>
-					<div className="profile_items_content">
-						<div className="profile_item">
-							<input type="text" value={this.state.userName} className="inp_user" maxLength="52" disabled="disabled" onChange={this.handleInput.bind(this, 'userName')} />
-						</div>
-						<div className="profile_item">
-							<input type="text" value={this.state.userEmail} className="inp_user" maxLength="72" disabled="disabled" onChange={this.handleInput.bind(this, 'userEmail')} />
-						</div>
-						<div className="profile_item">
-							<input type="text" value={this.state.phoneNum} className="inp_user" maxLength="48" disabled="disabled" onChange={this.handleInput.bind(this, 'phoneNum')} />
-						</div>
-						<div className="profile_item">
-							<input type="text" value={this.state.homeAddress} className="inp_user" maxLength="80" disabled="disabled" onChange={this.handleInput.bind(this, 'homeAddress')} />
-						</div>
-					</div>
-					<div className="btns">
-						<div className="btn_item">
-							<input type="button" value="修改资料" id="alter_profile" className="alter_btn" />
-						</div>
-						<div className="btn_item">
-							<input type="button" value="取消修改" id="cancel_alter" className="alter_btn" />
-						</div>
-						<div className="btn_item">
-							<input type="button" value="提交修改" id="submit_alter" className="alter_btn" onClick={this.submitData} />
-						</div>
-					</div>
-				</form>
-			</div>
-			{/**/}
-			<MineAlert alertStatus={this.state.alertStatus} alertTip={this.state.alertTip} closeAlert={this.shutDownAlert}
-			/>
-		</div>;
+        {/**/}
+        <MineHeader targetUrl="/alterPassword" targetUrlName="修改密码" />
+        {/**/}
+        <div className="profile_container">
+            <form className="mine_form" ref="mineForm">
+                <div className="title_div">
+                    <legend className="title_word">我的个人资料</legend>
+                </div>
+                <div className="profile_items_content">
+                    <div className="profile_item">
+                        <input type="text" value={this.state.username} className="inp_user" maxLength="52" disabled="disabled" onChange={this.handleInput.bind(this, 'userName')} />
+                    </div>
+                    <div className="profile_item">
+                        <input type="text" value={this.state.userEmail} className="inp_user" maxLength="72" disabled="disabled" onChange={this.handleInput.bind(this, 'userEmail')} />
+                    </div>
+                    <div className="profile_item">
+                        <input type="text" value={this.state.phoneNum} className="inp_user" maxLength="48" disabled="disabled" onChange={this.handleInput.bind(this, 'phoneNum')} />
+                    </div>
+                    <div className="profile_item">
+                        <input type="text" value={this.state.homeAddress} className="inp_user" maxLength="80" disabled="disabled" onChange={this.handleInput.bind(this, 'homeAddress')} />
+                    </div>
+                </div>
+                <div className="btns">
+                    <div className="btn_item">
+                        <input type="button" value="修改资料" id="alter_profile" className="alter_btn div_alter_pro" onClick={this.clickedAlterData} />
+                    </div>
+                    <div className="both_manual">
+                        <div className="btn_item manual_btn">
+                            <input type="button" value="取消修改" id="cancel_alter" className="alter_btn altering" onClick={this.cancelAlterFun} />
+                        </div>
+                        <div className="btn_item manual_btn">
+                            <input type="button" value="提交修改" id="submit_alter" className="alter_btn altering" onClick={this.submitData} />
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        {/**/}
+        <MineAlert alertStatus={this.state.alertStatus} alertTip={this.state.alertTip} closeAlert={this.shutDownAlert}
+            />
+        </div>;
         /**/
         return (content);
     }

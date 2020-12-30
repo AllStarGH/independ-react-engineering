@@ -30,11 +30,13 @@
                     <div class="btn_item">
                         <input type="button" value="修改资料" id="alter_profile" class="alter_btn" onclick="clickedAlterData()" />
                     </div>
-                    <div class="btn_item">
-                        <input type="button" value="取消修改" id="cancel_alter" class="alter_btn" />
-                    </div>
-                    <div class="btn_item">
-                        <input type="button" value="提交修改" id="submit_alter" class="alter_btn" />
+                    <div class="both_manual">
+                        <div class="btn_item manual_btn">
+                            <input type="button" value="取消修改" id="cancel_alter" class="alter_btn altering" onclick="javascript:cancelAlterFun()" />
+                        </div>
+                        <div class="btn_item manual_btn">
+                            <input type="button" value="提交修改" id="submit_alter" class="alter_btn altering" />
+                        </div>
                     </div>
                 </div>
             </form>
@@ -47,13 +49,59 @@
 function clickedAlterData() {
     var inputObj = document.getElementsByClassName('inp_user');
     console.log(inputObj);
-
     for (var i = inputObj.length - 1; i >= 0; i--) {
         inputObj[i].disabled = false;
     }
+
+    // 显示 提交修改+取消修改 按钮
+    var altering = document.getElementsByClassName('altering');
+    console.log(altering);
+    for (var n = altering.length - 1; n >= 0; n--) {
+        altering[n].style.display = 'block';
+    }
+
+    // 隐藏 修改资料 按钮
+    var alterProfile = document.getElementById('alter_profile');
+    console.dir(alterProfile);
+    alterProfile.style.display = 'none';
+}
+
+// 点击取消修改,恢复原状(隐藏取消+提交按钮,显示修改按钮,输入框变为不可输入)
+function cancelAlterFun() {
+    var inputObj = document.getElementsByClassName('inp_user');
+    console.log(inputObj);
+    for (var i = inputObj.length - 1; i >= 0; i--) {
+        inputObj[i].disabled = true;
+    }
+
+    // 隐藏 提交修改+取消修改 按钮
+    var altering = document.getElementsByClassName('altering');
+    console.log(altering);
+    for (var n = altering.length - 1; n >= 0; n--) {
+        altering[n].style.display = 'none';
+    }
+
+    // 显示 修改资料 按钮
+    var alterProfile = document.getElementById('alter_profile');
+    console.dir(alterProfile);
+    alterProfile.style.display = 'block';
+    alterProfile.style.left = '42%';
+    alterProfile.style.position = 'relative';
+
 }
 </script>
 <style type="text/css" media="screen">
+.both_manual {
+    overflow: hidden;
+    left: 30%;
+    position: relative;
+}
+
+.manual_btn {
+    float: left;
+    margin: 0 10px;
+}
+
 #cancel_alter,
 #submit_alter {
     display: none;
