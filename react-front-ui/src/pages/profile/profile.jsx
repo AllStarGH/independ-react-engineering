@@ -12,14 +12,25 @@ export default class Profile extends Component {
         super(props);
         console.info('Profile Constructor...');
         console.dir(this);
+
+        this.state = {
+            id: localStorage.getItem('userid'),
+            userName: '',
+            phoneNum: '',
+            homeAddress: '',
+            userEmail: '',
+            /**/
+            alertStatus: false,
+            alertTip: '',
+        }
     }
 
     componentDidMount() {
-        let userid = localStorage.getItem('userid');
+        let userid = this.state.id;
 
         console.log('Profile Component DID MOUNT...');
         console.log(this.props);
-        console.log('userid === ' + userid);
+        console.log('line-33-user.id === ' + userid);
 
         if (userid != null) {
             console.info('Already logged in');
@@ -31,19 +42,6 @@ export default class Profile extends Component {
                 alertTip: '您尚未登录,请先登录.',
             });
         }
-    }
-
-    // \\\\\\\\\\\\\\\\\\
-
-    state = {
-        id: null,
-        userName: '',
-        phoneNum: '',
-        homeAddress: '',
-        userEmail: '',
-        /**/
-        alertStatus: false,
-        alertTip: '',
     }
 
     // \\\\\\\\\\\\\\\\\\
@@ -69,9 +67,8 @@ export default class Profile extends Component {
         })
     }
 
-    // \\\\\\\\\\\\\\\\\\
     /**
-     * 检验非空
+     * 检验输入的表单参数
      *
      * @return     {(boolean|string)}  { description_of_the_return_value }
      */
@@ -82,28 +79,28 @@ export default class Profile extends Component {
         const { userName, userEmail, homeAddress, phoneNum } = this.state;
 
         if (!userName.toString().length) {
-            alertInfo = '用户名称禁止为空!';
             isValidate = true;
+
         } else if (!userEmail.toString().length) {
-            alertInfo = '邮箱地址禁止为空!';
             isValidate = true;
+
         } else if (!homeAddress.toString().length) {
-            alertInfo = '住址禁止为空!';
             isValidate = true;
+
         } else if (!phoneNum.toString().length) {
-            alertInfo = '电话号码禁止为空!';
             isValidate = true;
+
         }
 
-        this.setState({
-            alertTip: alertInfo,
-        });
         console.log('isValidate === ' + isValidate);
         return isValidate;
     }
 
-    // \\\\\\\\\\\\\\\\\\
-    // 获取用户的资料据地址参数ID
+    /**
+     * 获取用户的资料据地址参数ID
+     * @param  {[type]} uid [description]
+     * @return {[type]}     [description]
+     */
     getUserProfile = (uid) => {
         let url = '/api/userContro/getUserByUserid';
         console.log('参数ID==' + uid);
@@ -125,7 +122,7 @@ export default class Profile extends Component {
                         userEmail: udata.userEmail,
                     })
                 } else {
-                    console.error('发生了未知错误...');
+                    console.error('line-128-发生了未知错误...');
                 }
             })
             .catch(err => {
@@ -183,7 +180,7 @@ export default class Profile extends Component {
      * @return {[type]} [description]
      */
     cancelAlterFun = () => {
-        let userid = localStorage.getItem('userid');
+        let userid = this.state.id;
         let f = this.refs.mineForm;
 
         // 给input标签增加disabled="disabled"属性(setAttribute)
@@ -216,27 +213,34 @@ export default class Profile extends Component {
     // 提交修改后的资料
     submitData = () => {
         var nowTime = new Date().getTime();
-        let url = '';
+        let url = '/api/userContro/revampUserInfo2';
         let userParam = {};
 
         // 校验非空
         let isValidate = this.verifyNotNull();
         if (isValidate) {
-            this.opens();
+            this.setState({
+                alertTip: '参数检验未通过,请检查输入的信息,是否符合规范或有空白',
+                alertStatus: true
+            })
             return;
         }
 
         userParam.userEmail = this.state.userEmail;
         userParam.userName = this.state.userName;
-        userParam.userid = this.state.userid;
+        userParam.id = this.state.id;
         userParam.homeAddress = this.state.homeAddress;
         userParam.phoneNum = this.state.phoneNum;
-        console.info('修改后的资料:', userParam);
+        console.info('line-238-修改后的资料:', userParam);
 
         axios.post(url, userParam).then(res => {
             console.log(res);
             if (res.data.code === 200) {
                 let data = res.data.data;
+
+                /* keep it for an hour */
+                localStorage.setItem('userid', data.id, nowTime + 1000 * 10 * 360);
+
                 this.setState({
                     alertTip: '修改资料成功',
                     userName: data.userName,
@@ -244,15 +248,18 @@ export default class Profile extends Component {
                     homeAddress: data.homeAddress,
                     userEmail: data.userEmail,
                 });
-                /* keep it for an hour */
-                localStorage.setItem('userid', data.id, nowTime + 1000 * 10 * 360);
+
                 // localStorage.setItem('userName', data.userName);
                 // localStorage.setItem('userEmail', data.userEmail);
                 // localStorage.setItem('phoneNum', data.phoneNum);
                 // localStorage.setItem('homeAddress', data.homeAddress);
+
                 this.opens();
             } else {
-                console.info('未知错误...');
+                this.setState({
+                    alertTip: res.data.message,
+                    alertStatus: true,
+                });
             }
         }).catch(err => {
             console.error(err);

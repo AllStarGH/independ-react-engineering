@@ -80,15 +80,15 @@ export class ControController {
     }
 
     /**
-     * [http://localhost:1100/userContro/revampUserInfo?userName=胡一克勤&userEmail=1204402584@qq.com&phoneNum=136940219871&homeAddress=长城670000&id=12]
-     * @param {[type]} 'revampUserInfo' [description]
+     * [Post description]
+     * @param {[type]} 'revampUserInfo2' [description]
      */
-    @Get('revampUserInfo')
-    async revampUserInfo(@Query() query): Promise < Result > {
-    	console.info(query);
-    	
+    @Post('revampUserInfo2')
+    async revampUserInfo2(@Body() query): Promise < Result > {
+        console.info(query);
+
         // 检验电话和邮箱或昵称其中之一是否重复
-        var verifies: Result = await this.userServ1.verifyForRevampInfo(query.phoneNum, query.userEmail, query.userName);
+        var verifies: Result = await this.userServ1.verifyForRevampInfo(query.phoneNum, query.userEmail, query.userName, query.id);
         console.log(verifies);
         if (verifies.code != 200) {
             return verifies;
@@ -106,8 +106,37 @@ export class ControController {
         return ({ code: 200, message: "成功修改个人信息", data: user });
     }
 
-    /*
-     http://localhost:1100/userContro/regActTest?userName=信克勤&userEmail=1204404844@qq.com&phoneNum=13640219871&homeAddress=长城6700&password=123456
+    /**
+     * http://localhost:1100/userContro/revampUserInfoTest?userName=信克勤&userEmail=1204404844@qq.com&phoneNum=13640219871&homeAddress=长城迪卡锡&id=9
+     * 
+     * @param {[type]} 'revampUserInfoTest' [description]
+     */
+    @Get('revampUserInfoTest')
+    async revampUserInfoTest(@Query() query): Promise < Result > {
+        console.info(query);
+
+        // 检验电话和邮箱或昵称其中之一是否重复
+        var verifies: Result = await this.userServ1.verifyForRevampInfo(query.phoneNum, query.userEmail, query.userName, query.id);
+        console.log(verifies);
+        if (verifies.code != 200) {
+            return verifies;
+        }
+
+        var user = new User();
+        user.userName = query.userName;
+        user.userEmail = query.userEmail;
+        user.phoneNum = query.phoneNum;
+        user.homeAddress = query.homeAddress;
+        console.log('user== ');
+        console.dir(user);
+
+        await this.userServ1.updateOneUserById(query.id, user);
+        return ({ code: 200, message: "成功修改个人信息", data: user });
+    }
+
+    /**
+     * http://localhost:1100/userContro/regActTest?userName=信克勤&userEmail=1204404844@qq.com&phoneNum=13640219871&homeAddress=长城6700&password=123456
+     * @param {[type]} 'regActTest' [description]
      */
     @Get('regActTest')
     async regActTest(@Query() query): Promise < Result > {
@@ -116,7 +145,23 @@ export class ControController {
         return res;
     }
 
-    // 正式注册
+    /**
+     * http://localhost:1100/userContro/countColumnsTest?id=18&order=0&val=艾丝美拉达
+     * 
+     * @param {[type]} 'countColumnsTest' [description]
+     */
+    @Get('countColumnsTest')
+    async countColumnsTest(@Query() query): Promise < Result > {
+        console.dir(query);
+        let res = await this.userServ1.countsVerifies(query.id, query.order, query.val);
+        return res;
+    }
+
+    /**
+     * 正式注册
+     * 
+     * @param {[type]} 'register' [description]
+     */
     @Post('register')
     async register(@Body() userData: User): Promise < Result > {
         console.dir(userData);

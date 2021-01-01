@@ -54,46 +54,104 @@ export class Serv1Service {
     }
 
     /**
-     * 为修改个人信息检验电话/邮箱/昵称是否重复
+     * 统计除指定id外,符合某个值的字段的数量,即检查[电话/邮箱/昵称]的行的数目
+     * 
+     * @param  {number}  id    [description]
+     * @param  {string}  order [description]
+     * @param  {string}  val   [description]
+     * @return {Promise}       [description]
+     */
+    async countsVerifies(id: number, order: string, val: string): Promise < Result > {
+        console.log('70-val=== ' + val);
+
+        var res: Result = ({ code: 200, message: "除此行之外,并无重复", data: 0 });
+        var count = 0;
+
+        var connect = await getConnection().createQueryBuilder().select('user').from(User, 'user');
+
+        var columsArr: string[] = [
+            'user.userName = :userName',
+            'user.userEmail = :userEmail',
+            'user.phoneNum = :phoneNum',
+        ];
+
+        switch (order) {
+            case '0':
+                count = await connect.where(columsArr[0], { userName: val }).andWhere('user.id != :id', { id: id }).printSql().getCount();
+
+                if (count > 0) {
+                    console.log('switch-count=== ' + count);
+                    res.code = 434;
+                    res.message = '此用户名已存在,请更换';
+                }
+                break;
+
+            case '1':
+                count = await connect.where(columsArr[1], { userEmail: val }).andWhere('user.id != :id', { id: id }).printSql().getCount();
+
+                if (count > 0) {
+                    console.log('switch-count=== ' + count);
+                    res.code = 435;
+                    res.message = '此用户电子邮箱已存在,请更换';
+                }
+                break;
+
+            case '2':
+                count = await connect.where(columsArr[2], { phoneNum: val }).andWhere('user.id != :id', { id: id }).printSql().getCount();
+
+                if (count > 0) {
+                    console.log('switch-count=== ' + count);
+                    res.code = 436;
+                    res.message = '此用户电话号码已存在,请更换';
+                }
+                break;
+        }
+        res.data = count;
+
+        console.info('110 - res === ');
+        console.info(res);
+        return res;
+    }
+
+    /**
+     * 为 修改个人信息而检查 电话/邮箱/昵称 除本行之外是否重复
      * 
      * @param  {string}  phoneNum  [description]
      * @param  {string}  userEmail [description]
      * @param  {string}  userName  [description]
+     * @param  {number}  id        [description]
      * @return {Promise}           [description]
      */
-    async verifyForRevampInfo(phoneNum: string, userEmail: string, userName: string): Promise < Result > {
+    async verifyForRevampInfo(phoneNum: string, userEmail: string, userName: string, id: number): Promise < Result > {
 
-        var res: Result = ({ code: 200, message: "", data: null });
+        var res: Result = ({ code: 200, message: "用户名称/电邮/电话除此行外并未重复", data: 0 });
 
-        // 检验用户名是否重复
-        res = await this.verifyUserByOrder(userName, 0);
-        if (res.code !== 200) {
-            console.dir(res);
+        res = await this.countsVerifies(id, '0', userName);
+        if (res.data > 0) {
+            console.log('130-用户名称除此行外重复');
             return res;
         }
 
-        // 检验电子邮箱是否重复
-        res = await this.verifyUserByOrder(userEmail, 1);
-        if (res.code !== 200) {
-            console.dir(res);
+        res = await this.countsVerifies(id, '1', userEmail);
+        if (res.data > 0) {
+            console.log('136-用户电邮除此行外重复');
             return res;
         }
 
-        // 检验电话是否重复
-        res = await this.verifyUserByOrder(phoneNum, 2);
-        if (res.code !== 200) {
-            console.dir(res);
+        res = await this.countsVerifies(id, '2', phoneNum);
+        if (res.data > 0) {
+            console.log('142-用户电话除此行外重复');
             return res;
         }
 
-        console.log('res=== ');
+        console.log('146 - 用户名称/电邮/电话除此行外并未重复');
         console.dir(res);
         return res;
     }
 
 
     /**
-     * 检验用户名字/电子邮箱/电话是否重复存在
+     * 审查用户名字/电子邮箱/电话是否重复存在
      *
      * @param      {string}  para    The para
      * @param      {number}  order   The order
@@ -107,7 +165,7 @@ export class Serv1Service {
             'user.phoneNum = :phoneNum'
         ];
 
-        var con = await getConnection()
+        var connect = await getConnection()
             .createQueryBuilder()
             .select('user')
             .from(User, 'user');
@@ -115,7 +173,7 @@ export class Serv1Service {
         // 检验用户名-0,检验电子邮箱-1,检验电话-2
         switch (order) {
             case 0:
-                let usr1 = await con.where(stringArr[0], { userName: para })
+                let usr1 = await connect.where(stringArr[0], { userName: para })
                     .printSql()
                     .getOne();
                 if (usr1 != null) {
@@ -127,7 +185,7 @@ export class Serv1Service {
                 break;
 
             case 1:
-                let usr2 = await con.where(stringArr[1], { userEmail: para })
+                let usr2 = await connect.where(stringArr[1], { userEmail: para })
                     .printSql()
                     .getOne();
                 if (usr2 != null) {
@@ -139,7 +197,7 @@ export class Serv1Service {
                 break;
 
             case 2:
-                let usr3 = await con.where(stringArr[2], { phoneNum: para })
+                let usr3 = await connect.where(stringArr[2], { phoneNum: para })
                     .printSql()
                     .getOne();
                 if (usr3 != null) {
@@ -193,7 +251,7 @@ export class Serv1Service {
     }
 
     /**
-     * 获取一位用户资料据电话or邮箱
+     * 获取一位用户资料据电话/邮箱
      * Gets the user by phone or email.
      *
      * @param      {string}  arg     The argument
