@@ -117,7 +117,7 @@ export default class Regist extends Component {
                     /**/
                     setTimeout(() => {
                         this.props.history.push('/login');
-                    }, 15 * 1000);
+                    }, 5 * 1000);
                 } else {
                     console.dir(response.data.message);
                     this.setState({

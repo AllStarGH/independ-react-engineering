@@ -101,7 +101,7 @@ export default class Logining extends Component {
                     /**/
                     setTimeout(() => {
                         this.props.history.push('/');
-                    }, 15 * 1000);
+                    }, 5 * 1000);
                 } else {
                     console.log(res.data.message);
                     /**/

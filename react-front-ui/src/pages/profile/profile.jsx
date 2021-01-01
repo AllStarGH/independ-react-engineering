@@ -10,20 +10,21 @@ import './profile.less';
 export default class Profile extends Component {
     constructor(props) {
         super(props);
-        console.info('Profile Constructor===>>>');
+        console.info('Profile Constructor...');
         console.dir(this);
     }
 
     componentDidMount() {
         let userid = localStorage.getItem('userid');
 
-        console.log('Profile Component DID MOUNT!!!');
+        console.log('Profile Component DID MOUNT...');
         console.log(this.props);
         console.log('userid === ' + userid);
 
         if (userid != null) {
             console.info('Already logged in');
             // 获取用户资料
+            this.getUserProfile(userid);
         } else {
             this.setState({
                 alertStatus: true,
@@ -104,8 +105,14 @@ export default class Profile extends Component {
     // \\\\\\\\\\\\\\\\\\
     // 获取用户的资料据地址参数ID
     getUserProfile = (uid) => {
-        let uri = '';
-        axios.get(uri, uid)
+        let url = '/api/userContro/getUserByUserid';
+        console.log('参数ID==' + uid);
+
+        axios.get(url, {
+                params: {
+                    userid: uid
+                }
+            })
             .then(res => {
                 console.log(res);
                 if (res.data.code === 200) {
@@ -118,7 +125,7 @@ export default class Profile extends Component {
                         userEmail: udata.userEmail,
                     })
                 } else {
-                    console.info('未知错误...');
+                    console.error('发生了未知错误...');
                 }
             })
             .catch(err => {
@@ -176,6 +183,7 @@ export default class Profile extends Component {
      * @return {[type]} [description]
      */
     cancelAlterFun = () => {
+        let userid = localStorage.getItem('userid');
         let f = this.refs.mineForm;
 
         // 给input标签增加disabled="disabled"属性(setAttribute)
@@ -199,6 +207,10 @@ export default class Profile extends Component {
         alterProfile[0].style.left = '42%';
         alterProfile[0].style.position = 'relative';
 
+        // 重新加载信息
+        if (userid != null || '') {
+            this.getUserProfile(userid);
+        }
     }
 
     // 提交修改后的资料
@@ -248,7 +260,6 @@ export default class Profile extends Component {
     }
 
     // \\\\\\\\\\\\\\\\\\
-
     render() {
         var content = <div className="mine_profile_container">
         {/**/}
@@ -260,14 +271,30 @@ export default class Profile extends Component {
                     <legend className="title_word">我的个人资料</legend>
                 </div>
                 <div className="profile_items_content">
+                    {/**/}
+                    <div className="lab_div_comment">
+                        <label htmlFor="userName">用户名称</label>
+                    </div>
                     <div className="profile_item">
-                        <input type="text" value={this.state.username} className="inp_user" maxLength="52" disabled="disabled" onChange={this.handleInput.bind(this, 'userName')} />
+                        <input type="text" value={this.state.userName} className="inp_user" maxLength="52" disabled="disabled" onChange={this.handleInput.bind(this, 'userName')} />
+                    </div>
+                    {/**/}
+                    <div className="lab_div_comment">
+                        <label htmlFor="userEmail">用户邮箱</label>
                     </div>
                     <div className="profile_item">
                         <input type="text" value={this.state.userEmail} className="inp_user" maxLength="72" disabled="disabled" onChange={this.handleInput.bind(this, 'userEmail')} />
                     </div>
+                    {/**/}
+                    <div className="lab_div_comment">
+                        <label htmlFor="phoneNum">用户电话</label>
+                    </div>
                     <div className="profile_item">
                         <input type="text" value={this.state.phoneNum} className="inp_user" maxLength="48" disabled="disabled" onChange={this.handleInput.bind(this, 'phoneNum')} />
+                    </div>
+                    {/**/}
+                    <div className="lab_div_comment">
+                        <label htmlFor="homeAddress">用户住址</label>
                     </div>
                     <div className="profile_item">
                         <input type="text" value={this.state.homeAddress} className="inp_user" maxLength="80" disabled="disabled" onChange={this.handleInput.bind(this, 'homeAddress')} />
