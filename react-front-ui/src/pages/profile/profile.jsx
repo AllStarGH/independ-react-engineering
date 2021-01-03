@@ -74,7 +74,6 @@ export default class Profile extends Component {
      */
     verifyNotNull = () => {
         let isValidate = false;
-        let alertInfo = "";
 
         const { userName, userEmail, homeAddress, phoneNum } = this.state;
 
@@ -253,8 +252,10 @@ export default class Profile extends Component {
                 // localStorage.setItem('userEmail', data.userEmail);
                 // localStorage.setItem('phoneNum', data.phoneNum);
                 // localStorage.setItem('homeAddress', data.homeAddress);
-
                 this.opens();
+
+                // 恢复原状
+                setTimeout(this.cancelAlterFun(), 4 * 1000);
             } else {
                 this.setState({
                     alertTip: res.data.message,
