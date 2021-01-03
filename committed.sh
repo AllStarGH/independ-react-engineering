@@ -16,7 +16,7 @@ git remote -v
 
 git add .
 
-git commit -m '个人资料修改之前后台功能工作已完成,下一步是密码修改之功能业务'
+git commit -m '密码修改之后台功能工作已完成,下一步是密码修改之前台界面搭建'
 
 # error: 无法推送一些引用到 'https://github.com/AllStarGH/independ-react-engineering.git'
 # 提示：更新被拒绝，因为您当前分支的最新提交落后于其对应的远程分支。

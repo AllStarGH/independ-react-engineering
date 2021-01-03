@@ -169,4 +169,17 @@ export class ControController {
         return res;
     }
 
+    /**
+     *  http://localhost:1100/userContro/alterPwdTest?oldPass=666&newPass=999&id=2
+     *  
+     * @param {[type]} 'countColumnsTest' [description]
+     */
+    @Get('alterPwdTest')
+    async alterPwdTest(@Query() query): Promise < Result > {
+        console.dir(query);
+
+        let res = await this.userServ1.alterPasswordById(query.oldPass, query.newPass, query.id);
+        return res;
+    }
+
 }

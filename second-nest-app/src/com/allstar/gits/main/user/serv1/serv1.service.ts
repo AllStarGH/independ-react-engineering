@@ -352,4 +352,56 @@ export class Serv1Service {
         console.info(effects);
     }
 
+    /**
+     * 业务:改密码据id
+     * @param  {string}  oldPass [description]
+     * @param  {string}  newPass [description]
+     * @param  {number}  id      [description]
+     * @return {Promise}         [description]
+     */
+    async alterPasswordById(oldPass: string, newPass: string, id: number): Promise < Result > {
+        var response: Result = ({ code: 200, message: '您已经成功修改密码!', data: null });
+
+        // 根据id获取盐值和密文
+        var single = await getRepository(User)
+            .createQueryBuilder("user")
+            .select(["user.salt", "user.password"])
+            .printSql()
+            .where('user.id = :id', { id: id })
+            .getOne();
+        console.log(single);
+        console.log('salt = ' + single.salt + ' , pwd = ' + single.password + '\n');
+
+        /*
+        校验旧密码是否与原密文一致,若不一致则终止并报告给前台
+         */
+        // 首先将旧密码合成为密文
+        var oldScrectText = getScrectText.getScrectText(oldPass, single.salt);
+        console.log('oldScrectText === ' + oldScrectText);
+
+        if (oldScrectText !== single.password) {
+            response.code = 510;
+            response.message = '您输入的旧密码错误!';
+            return response;
+        }
+
+        // 若旧密码验证无错,则把新密码与盐值混合成新密文
+        var newScrectTxt = getScrectText.getScrectText(newPass, single[0]);
+        console.log('newScrectTxt=== ' + newScrectTxt);
+
+        // 修改密文字段,改为新密文的值
+        var result = await getConnection()
+            .createQueryBuilder()
+            .update(User)
+            .set({ password: newScrectTxt })
+            .where("id = :id", { id: id })
+            .printSql()
+            .execute();
+
+        console.log('line-391-result=== ');
+        console.log(result);
+
+        return response;
+    }
+
 }
