@@ -111,3 +111,9 @@ react-router:实现了路由的核心功能，而react-router-dom依赖react-rou
 	PropTypes 提供一系列验证器，可用于确保组件接收到的数据类型是有效的。例如, 需要使用PropTypes.string, 当传入的 prop 值类型不正确时，JavaScript 控制台将会显示警告。出于性能方面的考虑，propTypes 仅在开发模式下进行检查。
 
 ---------------------
+
+#### 注意事项
+
+	表单设计过程中,提交标签切勿使用button,因为button标签的点击事件,在表单内默认自带action动作,可能会导致强制重新渲染页面,造成麻烦. 提交动作应使用`input:type=button`
+
+---------------------

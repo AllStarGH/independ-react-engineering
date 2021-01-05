@@ -73,26 +73,96 @@ export default class Profile extends Component {
      * @return     {(boolean|string)}  { description_of_the_return_value }
      */
     verifyNotNull = () => {
-        let isValidate = false;
+        var isValidate = { sign: false, word: '' };
 
         const { userName, userEmail, homeAddress, phoneNum } = this.state;
 
-        if (!userName.toString().length) {
-            isValidate = true;
-
+        if (!userName.toString().length || userName.toString().length < 3) {
+            isValidate.sign = true;
+            isValidate.word = '请输入至少三个字符的用户名';
         } else if (!userEmail.toString().length) {
             isValidate = true;
-
+            isValidate.word = '请输入您的电子邮箱地址';
         } else if (!homeAddress.toString().length) {
-            isValidate = true;
-
+            isValidate.sign = true;
+            isValidate.word = '请输入您的住址';
         } else if (!phoneNum.toString().length) {
-            isValidate = true;
+            isValidate.sign = true;
+            isValidate.word = '请输入您的电话号码';
+
+        } else if (this.verifyPhone(phoneNum) != null) {
+            isValidate.sign = true;
+            isValidate.word = this.verifyPhone(phoneNum);
+
+        } else if (this.verifyMailbox(userEmail) != null) {
+            isValidate.sign = true;
+            isValidate.word = this.verifyMailbox(userEmail);
+
+        } else if (this.verifyHomeAddress(homeAddress) != null) {
+            isValidate.sign = true;
+            isValidate.word = this.verifyHomeAddress(homeAddress);
+
+        } else if (this.verifyUserName(userName) != null) {
+            isValidate.sign = true;
+            isValidate.word = this.verifyUserName(userName);
 
         }
 
-        console.log('isValidate === ' + isValidate);
+        console.log(isValidate);
         return isValidate;
+    }
+
+    /* 校验正则 */
+
+    // 校验手机号码
+    verifyPhone = (value) => {
+        console.log('校验手机号码===' + value)
+        // 中文、英文、数字包括横杠
+        let str = /^(13[0-9]|14[0-9]|15[0-9]|166|17[0-9]|18[0-9]|19[8|9])\d{8}$/;
+        let reg = new RegExp(str);
+
+        if (!reg.test(value)) {
+            return '请输入正确格式的手机号码';
+        }
+        return null;
+    }
+
+    // 校验住址
+    verifyHomeAddress = (value) => {
+        console.log('校验住址===' + value)
+        // 中文、英文、数字包括横杠
+        let str = /^[\u4E00-\u9FA5A-Za-z0-9-]+$/;
+        let reg = new RegExp(str);
+
+        if (!reg.test(value)) {
+            return '请输入正确格式的住址(中文、英文、数字,及横杠)';
+        }
+        return null;
+    }
+
+    // 校验邮箱
+    verifyMailbox = (value) => {
+        console.log('校验邮箱===' + value);
+        let str = /\w+([-+.']\w+)*@\w+([-.]w+)*\.\w+([-.]\w+)*/;
+        let reg = new RegExp(str);
+
+        if (!reg.test(value)) {
+            return '请输入正确格式的邮箱地址';
+        }
+        return null;
+    }
+
+    // 校验用户名
+    verifyUserName = (value) => {
+        console.log('校验用户名===' + value)
+        // 中文、英文、数字但不包括下划线等符号
+        let str = /^[\u4E00-\u9FA5A-Za-z0-9]{2,20}$/;
+        let reg = new RegExp(str);
+
+        if (!reg.test(value)) {
+            return '请输入正确格式的用户名(中文、英文、数字)';
+        }
+        return null;
     }
 
     /**
@@ -114,14 +184,13 @@ export default class Profile extends Component {
                 if (res.data.code === 200) {
                     let udata = res.data.data;
                     this.setState({
-                        id: udata.id,
                         userName: udata.userName,
                         phoneNum: udata.phoneNum,
                         homeAddress: udata.homeAddress,
                         userEmail: udata.userEmail,
                     })
                 } else {
-                    console.error('line-128-发生了未知错误...');
+                    console.error('line-128-发生了未知错误...可能是session过期了');
                 }
             })
             .catch(err => {
@@ -217,10 +286,10 @@ export default class Profile extends Component {
 
         // 校验非空
         let isValidate = this.verifyNotNull();
-        if (isValidate) {
+        if (isValidate.sign) {
             this.setState({
-                alertTip: '参数检验报错,请检查输入的信息,是否符合规范或有空白',
-                alertStatus: true
+                alertTip: isValidate.word,
+                alertStatus: isValidate.sign
             })
             return;
         }

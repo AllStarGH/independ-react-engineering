@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import axios from 'axios';
 
 import MineAlert from '@/components/public/alert/alert';
@@ -7,22 +7,21 @@ import MineHeader from '@/components/public/header/header';
 
 import './index.less';
 
-export default class AlterKwd extends Component {
+export default class AlterKwd extends PureComponent {
     // \\\\\\\\\\\\\\\\\\\\\\
     constructor(props) {
         super(props);
         console.log('==== AlterKwd ====');
         console.log(this);
-    }
-
-    // \\\\\\\\\\\\\\\\\\\\\\
-    state = {
-        id: localStorage.getItem('userid'),
-        oldPass: '',
-        newPass: '',
-        reNewPass: '',
-        alertTip: '',
-        alertStatus: false
+        // 
+        this.state = {
+            id: localStorage.getItem('userid'),
+            oldPass: '',
+            newPass: '',
+            reNewPass: '',
+            alertTip: '',
+            alertStatus: false
+        }
     }
 
     // \\\\\\\\\\\\\\\\\\\\\\
@@ -36,7 +35,7 @@ export default class AlterKwd extends Component {
     killingAlertWindow = () => {
         this.setState({
             alertStatus: false
-        })
+        });
     }
 
     // \\\\\\\\\\\\\\\\\\\\\\
@@ -44,7 +43,7 @@ export default class AlterKwd extends Component {
     sendDataForRevamp = () => {
         var url = "/api/userContro/alterPwd";
 
-        if (!this.state.id.toString().length) {
+        if (this.state.id == null || '' || undefined) {
             this.setState({
                 alertTip: '您尚未登录,请重新登录',
                 alertStatus: true,
@@ -55,6 +54,7 @@ export default class AlterKwd extends Component {
         // 校验参数
         var checks = this.verifiesParams();
         if (checks.flag) {
+            console.info('stop it === ' + checks.info);
             this.setState({
                 alertTip: checks.info,
                 alertStatus: checks.flag,
@@ -74,16 +74,16 @@ export default class AlterKwd extends Component {
                     let sec = 5;
 
                     this.setState({
-                        alertTip: '密码修改成功, ' + sec + ' 秒钟后跳转至登录页',
+                        alertTip: '密码修改成功,请重新登录, ' + sec + ' 秒钟后跳转至登录页',
                         alertStatus: true,
                     });
 
-                    // setTimeout(() => {
-                    //     this.props.history.push('/regist')
-                    // }, sec * 1000);
+                    setTimeout(() => {
+                        this.props.history.push('/login')
+                    }, sec * 1000);
                 } else {
                     this.setState({
-                        alertTip: response.data.message,
+                        alertTip: response.data.message+',首先排查session',
                         alertStatus: true,
                     });
                 }
@@ -110,16 +110,16 @@ export default class AlterKwd extends Component {
         console.log('old pass== ' + oldPass + ',new pass== ' + newPass + ',retry new pass== ' + reNewPass);
         // 
         if (!oldPass.toString().length || oldPass.toString().length < 3) {
-            checks.info = '旧密码未输入旧密码长度小于3';
+            checks.info = '旧密码未输入或旧密码长度小于3个字符';
             checks.flag = true;
-        } else if (!newPass.toString().length) {
-            checks.info = '新密码未输入';
+        } else if (!newPass.toString().length || oldPass.toString().length < 3) {
+            checks.info = '新密码未输入或新密码长度小于3个字符';
             checks.flag = true;
-        } else if (!reNewPass.toString().length) {
-            checks.info = '请再次输入新密码';
+        } else if (!reNewPass.toString().length || oldPass.toString().length < 3) {
+            checks.info = '重复确认的新密码空白或长度小于3个字符,请再次输入';
             checks.flag = true;
         } else if (newPass !== reNewPass) {
-            checks.info = '两次输入的新密码不同!';
+            checks.info = '新密码确认有误!';
             checks.flag = true;
         }
 
@@ -188,7 +188,7 @@ export default class AlterKwd extends Component {
                 </div>
                 <div className="btns_div">
                     <div className="btn_item">
-                        <button className="submitt_btn common_btn" id="btn_committ" onClick={this.sendDataForRevamp} > 提交 </button>
+                        <input type="button" className="submitt_btn common_btn" id="btn_committ" onClick={this.sendDataForRevamp} value="提交" />
                     </div>
                     <div className="btn_item">
                         <input type="reset" value="重置" className="common_btn" id="btn_reset" onClick={this.formReset} />

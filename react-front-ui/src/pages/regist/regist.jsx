@@ -35,7 +35,7 @@ export default class Regist extends Component {
         alertStatus: false,
         alertTip: "",
         /**/
-        informationTip: '',
+        informationTip: ''
     }
 
     // \\\\\\\\\\\\\\\\\\\\\\\\\\
@@ -66,11 +66,11 @@ export default class Regist extends Component {
         } else if (!phoneNum.toString().length) {
             alertInfo = '电话号码禁止为空!';
             isValidate = true;
-        } else if (!password.toString().length) {
-            alertInfo = '密码禁止为空!';
+        } else if (!password.toString().length || password.toString().length < 3) {
+            alertInfo = '密码禁止为空且长度不得小于3个字符!';
             isValidate = true;
-        } else if (!repassword.toString().length) {
-            alertInfo = '请再次输入密码!';
+        } else if (!repassword.toString().length || repassword.toString().length < 3) {
+            alertInfo = '请输入确认密码且长度不得小于3个字符!';
             isValidate = true;
         }
 
@@ -171,8 +171,6 @@ export default class Regist extends Component {
         })
     }
 
-    // \\\\\\\\\\\\\\\\\\\\\\\\\\
-
     /* 校验正则 */
 
     // 校验手机号码
@@ -181,13 +179,13 @@ export default class Regist extends Component {
         // 中文、英文、数字包括横杠
         let str = /^(13[0-9]|14[0-9]|15[0-9]|166|17[0-9]|18[0-9]|19[8|9])\d{8}$/;
         let reg = new RegExp(str);
-        let infoTip = "";
-        if (reg.test(value) === false) {
-            infoTip = '请输入正确格式的手机号码';
+
+        if (!reg.test(value)) {
+            this.setState({
+                informationTip: '请输入正确格式的手机号码'
+            })
         }
-        this.setState({
-            informationTip: infoTip
-        })
+
     }
 
     // 校验住址
@@ -196,13 +194,13 @@ export default class Regist extends Component {
         // 中文、英文、数字包括横杠
         let str = /^[\u4E00-\u9FA5A-Za-z0-9-]+$/;
         let reg = new RegExp(str);
-        let infoTip = "";
-        if (reg.test(value) === false) {
-            infoTip = '请输入正确格式的住址(中文、英文、数字,及横杠)';
+
+        if (!reg.test(value)) {
+            this.setState({
+                informationTip: '请输入正确格式的住址(中文、英文、数字,及横杠)'
+            })
         }
-        this.setState({
-            informationTip: infoTip
-        })
+
     }
 
     // 校验邮箱
@@ -210,13 +208,13 @@ export default class Regist extends Component {
         console.log('校验邮箱===' + value);
         let str = /\w+([-+.']\w+)*@\w+([-.]w+)*\.\w+([-.]\w+)*/;
         let reg = new RegExp(str);
-        let infoTip = "";
-        if (reg.test(value) === false) {
-            infoTip = '请输入正确格式的邮箱地址';
+
+        if (!reg.test(value)) {
+            this.setState({
+                informationTip: '请输入正确格式的邮箱地址'
+            })
         }
-        this.setState({
-            informationTip: infoTip
-        })
+
     }
 
     // 校验用户名
@@ -225,13 +223,13 @@ export default class Regist extends Component {
         // 中文、英文、数字但不包括下划线等符号
         let str = /^[\u4E00-\u9FA5A-Za-z0-9]{2,20}$/;
         let reg = new RegExp(str);
-        let infoTip = "";
-        if (reg.test(value) === false) {
-            infoTip = '请输入正确格式的用户名(中文、英文、数字)';
+
+        if (!reg.test(value)) {
+            this.setState({
+                informationTip: '请输入正确格式的用户名(中文、英文、数字)'
+            })
         }
-        this.setState({
-            informationTip: infoTip
-        })
+
     }
 
     // \\\\\\\\\\\\\\\\\\\\\\\\\\

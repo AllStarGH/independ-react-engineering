@@ -92,12 +92,10 @@ export default class Logining extends Component {
                         alertStatus: true,
                         alertTip: '用户登录成功,即将跳转至首页',
                     });
+                    
                     /*保存一小时*/
                     localStorage.setItem('userid', u.id, date + 100 * 100 * 360);
-                    // localStorage.setItem('userName',u.userName);
-                    // localStorage.setItem('userEmail',u.userEmail);
-                    // localStorage.setItem('phoneNum',u.phoneNum);
-                    // localStorage.setItem('homeAddress',u.homeAddress);
+                    
                     /**/
                     setTimeout(() => {
                         this.props.history.push('/');
