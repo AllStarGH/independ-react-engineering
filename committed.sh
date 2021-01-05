@@ -5,6 +5,8 @@
 
 # git remote add origin https://github.com/AllStarGH/independ-react-engineering.git
 
+git status
+
 # 查看当前工作在哪个分支上
 git branch -v
 
