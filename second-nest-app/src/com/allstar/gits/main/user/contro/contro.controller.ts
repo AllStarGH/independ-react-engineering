@@ -182,4 +182,12 @@ export class ControController {
         return res;
     }
 
+    @Post('alterPwd')
+    async alterPwd(@Body() query): Promise < Result > {
+        console.dir(query);
+
+        let res = await this.userServ1.alterPasswordById(query.oldPass, query.newPass, query.id);
+        return res;
+    }
+
 }

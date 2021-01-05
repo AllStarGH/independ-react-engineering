@@ -236,6 +236,17 @@ export default class Regist extends Component {
 
     // \\\\\\\\\\\\\\\\\\\\\\\\\\
 
+    formReset = () => {
+        this.setState({
+            userName: "",
+            phoneNum: "",
+            userEmail: "",
+            homeAddress: "",
+            password: '',
+            repassword: '',
+        })
+    }
+
     // 关闭弹窗
     closeAlert = () => {
         this.setState({
@@ -291,7 +302,7 @@ export default class Regist extends Component {
                 </div>
                 <div className="btn_container">
                     <div className="action_btn_ele">
-                        <input type="reset" value="Reset" className="reset_button btn_part" />
+                        <input type="reset" value="Reset" className="reset_button btn_part" onClick={this.formReset} />
                     </div>
                     <div className="action_btn_ele">
                         <input type="button" value="Submit" className="submit_button btn_part" id="submit_button_only" onClick={this.registHandler} />

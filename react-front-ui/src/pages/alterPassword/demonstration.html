@@ -6,46 +6,136 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Demonstration</title>
 </head>
+<style type="text/css">
+.official_container {
+    background: gray;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0px;
+    left: 0px;
+}
+
+.mine_container {
+    width: 300px;
+    height: 365px;
+    background: #ececec;
+    border-radius: 6px;
+    left: 39%;
+    top: 20%;
+    position: absolute;
+}
+
+.mine_alt_form {
+    height: 100%;
+}
+
+.btns_div {
+    overflow: hidden;
+    left: 27%;
+    position: relative;
+    top: 8%;
+}
+
+.btn_item {
+    float: left;
+    margin: 0 10px;
+}
+
+.keyword_divs {
+    left: 8%;
+    position: relative;
+    top: 5%;
+}
+
+.kwd_item {
+    margin: 15px 0;
+}
+
+.inputs {
+    width: 83%;
+    border-radius: 4px;
+    border-width: 0;
+    margin: 6px 0 0 0;
+    height: 32px;
+}
+
+.item_for_inp {
+    font-size: 16px;
+    color: #484343;
+}
+
+.common_btn {
+    font-size: 19px;
+    color: white;
+}
+
+.title_div {
+    text-align: center;
+    top: 4%;
+    position: relative;
+    color: #3f4042;
+}
+
+.submitt_btn {
+    border: 0;
+    background: #3482f3;
+    border-radius: 2px;
+}
+
+#btn_reset {
+    border: 0;
+    background: #f537b4;
+    border-radius: 2px;
+}
+</style>
 
 <body>
-    <div class="mine_container">
-        <form class="mine_alt_form">
-            <!--  -->
-            <div class="keyword_divs">
-                <div class="kwd_item">
-                    <div class="item_for_inp">
-                        <label for="oldPwd"> 请输入旧密码 </label>
+    <div class="official_container">
+        <div class="mine_container">
+            <form class="mine_alt_form">
+                <!--  -->
+                <div class="title_div">
+                    <b class="form_title">
+                        修改密码
+                    </b>
+                </div>
+                <div class="keyword_divs">
+                    <div class="kwd_item">
+                        <div class="item_for_inp">
+                            <label for="oldPass"> 请输入旧密码 </label>
+                        </div>
+                        <div class="inp_item">
+                            <input type="password" maxlength="16" name="oldPass" class="inputs" />
+                        </div>
                     </div>
-                    <div class="inp_item">
-                        <input type="password" maxlength="16" name="oldPwd" class="inputs" />
+                    <div class="kwd_item">
+                        <div class="item_for_inp">
+                            <label for="newPass"> 请输入新密码 </label>
+                        </div>
+                        <div class="inp_item">
+                            <input type="password" maxlength="16" name="newPass" class="inputs" /></div>
+                    </div>
+                    <div class="kwd_item">
+                        <div class="item_for_inp">
+                            <label for="renewPass"> 请再次输入新密码 </label>
+                        </div>
+                        <div class="inp_item">
+                            <input type="password" maxlength="16" name="renewPass" class="inputs" /></div>
                     </div>
                 </div>
-                <div class="kwd_item">
-                    <div class="item_for_inp">
-                        <label for="newPwd"> 请输入新密码 </label>
+                <!--  -->
+                <div class="btns_div">
+                    <div class="btn_item">
+                        <button class="submitt_btn common_btn" id="btn_committ"> 提交 </button>
                     </div>
-                    <div class="inp_item">
-                        <input type="password" maxlength="16" name="newPwd" class="inputs" /></div>
-                </div>
-                <div class="kwd_item">
-                    <div class="item_for_inp">
-                        <label for="reNewPwd"> 请再次输入新密码 </label>
+                    <div class="btn_item">
+                        <input type="reset" value="重置" class="common_btn" id="btn_reset">
                     </div>
-                    <div class="inp_item">
-                        <input type="password" maxlength="16" name="reNewPwd" class="inputs" /></div>
                 </div>
-            </div>
-            <!--  -->
-            <div class="btns_div">
-                <div class="btn_item" id="btn_committ">
-                    <button class="submitt_btn"> 提交 </button>
-                </div>
-                <div class="btn_item" id="btn_reset">
-                    <input type="reset" value="重置">
-                </div>
-            </div>
-            <!--  -->
-        </form>
+                <!--  -->
+            </form>
+        </div>
     </div>
 </body>
 

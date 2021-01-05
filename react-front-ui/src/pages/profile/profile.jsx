@@ -39,7 +39,7 @@ export default class Profile extends Component {
         } else {
             this.setState({
                 alertStatus: true,
-                alertTip: '您尚未登录,请先登录.',
+                alertTip: '您尚未登录,请先行登录.',
             });
         }
     }
@@ -219,7 +219,7 @@ export default class Profile extends Component {
         let isValidate = this.verifyNotNull();
         if (isValidate) {
             this.setState({
-                alertTip: '参数检验未通过,请检查输入的信息,是否符合规范或有空白',
+                alertTip: '参数检验报错,请检查输入的信息,是否符合规范或有空白',
                 alertStatus: true
             })
             return;
@@ -248,10 +248,6 @@ export default class Profile extends Component {
                     userEmail: data.userEmail,
                 });
 
-                // localStorage.setItem('userName', data.userName);
-                // localStorage.setItem('userEmail', data.userEmail);
-                // localStorage.setItem('phoneNum', data.phoneNum);
-                // localStorage.setItem('homeAddress', data.homeAddress);
                 this.opens();
 
                 // 恢复原状

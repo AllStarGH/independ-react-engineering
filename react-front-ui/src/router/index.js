@@ -13,6 +13,8 @@ const Logining = lazy(() => import('@/pages/logining/logining'));
 const UsersList = lazy(() => import('@/pages/userslist/usersList'));
 const Profile = lazy(() => import('@/pages/profile/profile'));
 
+const AlterKwd = lazy(() => import('@/pages/alterPassword/alterKwd'));
+
 /**
  * This class describes my router.
  *
@@ -44,19 +46,21 @@ export default class MyRouter extends Component {
             <HashRouter>
                 <Suspense fallback={<div>Loading...</div>} maxDuration={1000}>
                     <Switch>
-                        <Route exact path="/" component={Home} />
+                        <Route exact path="/" component = {Home} />
 
-                        <Route exact path="/login" component={Logining} />
+                        <Route exact path="/login" component = {Logining} />
 
-                        <Route exact path="/reg" component={Regist} />
+                        <Route exact path="/reg" component = {Regist} />
 
-                        <Route exact path="/posts" component={Posts} />
+                        <Route exact path="/posts" component = {Posts} />
 
-                        <Route exact path="/postForm" component={PostForm} />
+                        <Route exact path="/postForm" component = {PostForm} />
 
-                        <Route exact path="/usersList" component={UsersList} />
+                        <Route exact path="/usersList" component = {UsersList} />
 
-                        <Route exact path="/profile" component={Profile} />
+                        <Route exact path="/profile" component = {Profile} />
+
+                        <Route exact from = "/alterPassword" component = {AlterKwd} />
 
                         <Redirect exact from = "/" to = {Home} />
                     </Switch>
