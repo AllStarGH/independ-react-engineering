@@ -67,8 +67,8 @@ export default class usersList extends Component {
             <div className="heads_div">
         <MineHeader targetUrl="" targetUrlName="" />
             </div>
-        <div style={{height:400,width:'100%'}} className="data_grid_div">
-            <DataGrid rows={this.state.tblList} columns={this.columns} pageSize={5} checkboxSelection />
+        <div style={{height:650,width:'100%'}} className="data_grid_div">
+            <DataGrid rows={this.state.tblList} columns={this.columns} pageSize={10} checkboxSelection />
             </div>
         </div>;
         /**/

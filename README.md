@@ -1,11 +1,19 @@
-React_个人独立自主设计之工程
+React:个人设计之工程
 ======
 
 ---------------------
 
-主要以react+react-redux, 联合nest.js+typescript的前后端分离开发之项目.
+本项目是以react前端框架和typescript后端框架nest,以及ORM框架typeORM相结合的前后端分离开发项目,主要目的是上手练习react+ts,现已收尾,已实现的功能有:
+
++ 登录,注册
++ 全部用户以列表形式查看
++ 修改资料
++ 修改密码
+
+*数据库是sqlite3*
 
 ---------------------
+
 
 <i>创建前台工程</i>:
 
@@ -14,7 +22,6 @@ React_个人独立自主设计之工程
 	npx create-react-app PROJECT-NAME
 
 ```
-
 
 ---------------------
 
@@ -114,6 +121,6 @@ react-router:实现了路由的核心功能，而react-router-dom依赖react-rou
 
 #### 注意事项
 
-	表单设计过程中,提交标签切勿使用button,因为button标签的点击事件,在表单内默认自带action动作,可能会导致强制重新渲染页面,造成麻烦. 提交动作应使用`input:type=button`
+	表单设计过程中,提交标签切勿使用button,因为button标签的点击事件,在表单内默认自带action动作,可能会导致强制重新渲染页面,造成麻烦. 提交动作应使用 input:type=button
 
 ---------------------

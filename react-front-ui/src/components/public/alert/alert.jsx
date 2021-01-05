@@ -56,7 +56,7 @@ export default class MineAlert extends Component {
         this.props.alertStatus
         &&
         <div className="alert-contain">
-            <div className="alert-context">
+            <div className="alert-context" id="mine_alert_cont">
                 <div className="alert-context-detail">
                     {this.props.alertTip}
                 </div>

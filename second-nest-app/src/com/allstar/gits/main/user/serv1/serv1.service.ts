@@ -236,6 +236,8 @@ export class Serv1Service {
         // 校验密码,不匹配便抛错
         /*将提交的密码与盐值混合成密文,再与表中密文比对*/
         let newText = await getScrectText.getScrectText(userData.password, user.salt);
+        console.log('newText=== ' + newText);
+
         if (newText != user.password) {
             console.log('密码不正确');
             result.code = 411;
@@ -244,6 +246,7 @@ export class Serv1Service {
         }
         console.log("密码正确.");
         console.log(user);
+
         user.salt = '';
         user.password = '';
         result.data = user;
@@ -386,7 +389,7 @@ export class Serv1Service {
         }
 
         // 若旧密码验证无错,则把新密码与盐值混合成新密文
-        var newScrectTxt = getScrectText.getScrectText(newPass, single[0]);
+        var newScrectTxt = getScrectText.getScrectText(newPass, single.salt);
         console.log('newScrectTxt=== ' + newScrectTxt);
 
         // 修改密文字段,改为新密文的值

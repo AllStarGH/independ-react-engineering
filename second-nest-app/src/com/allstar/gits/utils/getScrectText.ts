@@ -10,10 +10,13 @@ import crypto = require("crypto");
  *
  * @return     {<type>}  The screct text.
  */
-export const getScrectText = (password: string, uuid:string):string => {
-	var screctText = crypto.createHash('md5')
-	.update(uuid + password + uuid)
-	.digest('hex');
-	console.log('screctText === ' + screctText);
-	return screctText;
+export const getScrectText = (password: string, uuid: string): string => {
+    console.info('uuid=== ' + uuid);
+
+    var screctText = crypto.createHash('md5')
+        .update(uuid + password + uuid)
+        .digest('hex');
+
+    console.log('screctText === ' + screctText);
+    return screctText;
 }
